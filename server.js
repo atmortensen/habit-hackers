@@ -20,11 +20,11 @@ var todoSchema = new mongoose.Schema({
 });
 var Todo = mongoose.model("todo", todoSchema);
 
-Todo({
-  item: 'this is a test',
-  date: 'today',
-  done: false
-}).save(err => err ? console.log(err) : null)
+// Todo({
+//   item: 'this is a test',
+//   date: 'today',
+//   done: false
+// }).save(err => err ? console.log(err) : null)
 
 // Authentication middleware.
 const authenticate = jwt({

@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
-import Layout from './components/layout'
-import Home from './components/home'
-import Login from './components/login'
+import Layout from './layout'
+import Home from './views/home/home'
+import Ideas from './views/ideas/ideas'
+import Dashboard from './views/dashboard/dashboard'
 import {Auth0} from './helpers/auth0'
 
 export default class Routes extends Component {
@@ -14,7 +15,8 @@ export default class Routes extends Component {
           
             <Switch>
               <Route exact path='/' component={Home} />  
-              <Route path="/login" component={Login} />
+              <Route path="/ideas" component={Ideas} />
+              <Route path="/dashboard" component={Dashboard} />
               <Route path="/auth0" component={Auth0} />
               <Route render={function () {
                 return <p>Not Found</p>

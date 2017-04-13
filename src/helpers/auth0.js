@@ -11,9 +11,6 @@ export class Auth0 extends Component {
         redirectUrl: 'http://localhost:3000/auth0',
         responseType: 'token'
       },
-      theme: {
-        primaryColor: '#31324F'
-      },
       allowedConnections: ['google-oauth2', 'facebook']
     })
     // Add callback for lock `authenticated` event
@@ -31,9 +28,9 @@ export class Auth0 extends Component {
 
     this.lock.getProfile(authResult.idToken, (error, profile) => {
       localStorage.setItem('profile', JSON.stringify(profile))
+      if(this.props) this.props.history.push('/dashboard')
     })
-
-    if(this.props) this.props.history.push('/')
+    
   }
 
   login() {
@@ -67,7 +64,7 @@ export class Auth0 extends Component {
     // Clear user token and profile data from local storage
     localStorage.removeItem('id_token')
     localStorage.removeItem('profile')
-    window.location.replace('/login')
+    window.location.replace('/')
   }
 
   render(){

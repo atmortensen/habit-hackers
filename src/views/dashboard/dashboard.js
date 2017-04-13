@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import auth from '../helpers/auth0'
+import auth from '../../helpers/auth0'
 import axios from 'axios'
 
-export default class Home extends Component {
+export default class Dashboard extends Component {
 	constructor(){
 		super()
 
@@ -14,8 +14,8 @@ export default class Home extends Component {
 
 	componentDidMount(){
 		const _this = this
-
-		_this.setState({profile: auth.getProfile()})
+		_this.setState({profile: auth.getProfile().name})
+		
 
 		const config = {
 			headers: {'Authorization': 'Bearer ' + localStorage.getItem('id_token')}
@@ -25,16 +25,13 @@ export default class Home extends Component {
 		.then(function (response) {
 			_this.setState({message: response.data.message})
 		})
-		.catch(function (error) {
-			_this.setState({message: 'Error you are not logged in!'})
-		})
 		
 	}
 
   render() {
-    return !auth.loggedIn() ? <p>Not logged in!</p> : (
+    return !auth.loggedIn() ? <h2>You must loggin to view this page!</h2> : (
       <div>
-        <h1>Home</h1>
+        <h1>Dashboard</h1>
         <h3>{this.state.message}</h3>
         <p>{JSON.stringify(this.state.profile)}</p>
         <button onClick={auth.logout}>Logout</button>
