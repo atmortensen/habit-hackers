@@ -1,20 +1,13 @@
 import Auth0Lock from 'auth0-lock'
-import React, {Component} from 'react'
-import { isTokenExpired } from './token-helper'
 
-export class Auth0 extends Component {
-  constructor() {
-    super()
+class Auth0 {
+  constructor(clientId, domain) {
     // Configure Auth0
-    this.lock = new Auth0Lock('7cwpdzgLqT9h0Y5qTCh4GZDOVtGqGu61', 'mortensen.auth0.com', {
+    this.lock = new Auth0Lock(clientId, domain, {
       auth: {
-        redirectUrl: 'http://localhost:3000/auth0',
+        redirectUrl: 'http://localhost:3000/',
         responseType: 'token'
-      },
-      theme: {
-        primaryColor: '#31324F'
-      },
-      allowedConnections: ['google-oauth2', 'facebook']
+      }
     })
     // Add callback for lock `authenticated` event
     this.lock.on('authenticated', this._doAuthentication.bind(this))
@@ -27,7 +20,6 @@ export class Auth0 extends Component {
   _doAuthentication(authResult) {
     // Saves the user token
     this.setToken(authResult.idToken)
-    if(this.props) this.props.history.push('/')
   }
 
   login() {
@@ -37,8 +29,7 @@ export class Auth0 extends Component {
 
   loggedIn() {
     // Checks if there is a saved token and it's still valid
-    const token = this.getToken()
-    return !!token && !isTokenExpired(token)
+    return !!this.getToken()
   }
 
   setToken(idToken) {
@@ -56,13 +47,8 @@ export class Auth0 extends Component {
     localStorage.removeItem('id_token')
     window.location.replace('/login')
   }
-
-  render(){
-    return <p>LOADING...</p>
-  }
-
 }
 
-const auth = new Auth0()
+const auth = new Auth0('7cwpdzgLqT9h0Y5qTCh4GZDOVtGqGu61', 'mortensen.auth0.com')
 
 export default auth

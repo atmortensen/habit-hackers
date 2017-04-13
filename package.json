@@ -1,14 +1,17 @@
 {
-  "name": "my-app",
+  "name": "habit-hackers",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "auth0-lock": "^10.14.0",
+    "axios": "^0.16.1",
+    "cors": "^2.8.3",
     "dotenv": "^4.0.0",
     "events": "^1.1.1",
     "express": "^4.15.2",
     "express-jwt": "^5.1.0",
     "jwt-decode": "^2.2.0",
+    "path": "^0.12.7",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
@@ -26,5 +29,17 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:3001",
+  "description": "Create good habits and break bad ones as a team.",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atmortensen/habit-hackers.git"
+  },
+  "author": "Alexander Mortensen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atmortensen/habit-hackers/issues"
+  },
+  "homepage": "https://github.com/atmortensen/habit-hackers#readme"
 }
