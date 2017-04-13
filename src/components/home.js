@@ -7,12 +7,15 @@ export default class Home extends Component {
 		super()
 
 		this.state = {
-			message: null
+			message: null,
+			profile: null
 		}
 	}
 
 	componentDidMount(){
 		const _this = this
+
+		_this.setState({profile: auth.getProfile()})
 
 		const config = {
 			headers: {'Authorization': 'Bearer ' + localStorage.getItem('id_token')}
@@ -33,6 +36,7 @@ export default class Home extends Component {
       <div>
         <h1>Home</h1>
         <h3>{this.state.message}</h3>
+        <p>{JSON.stringify(this.state.profile)}</p>
         <button onClick={auth.logout}>Logout</button>
       </div>
     )

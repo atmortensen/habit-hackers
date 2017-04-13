@@ -2,14 +2,29 @@ const express = require('express')
 const app = express()
 const jwt = require('express-jwt')
 const cors = require('cors')
+const mongoose = require('mongoose')
 require('dotenv').config()
-
-if (!process.env.AUTH0_DOMAIN || !process.env.AUTH0_CLIENT_ID || !process.env.AUTH0_CLIENT_SECRET) {
-  throw 'Make sure you have AUTH0_DOMAIN, AUTH0_CLIENT_ID, and AUTH0_CLIENT_SECRET in your .env file'
-}
 
 app.use(cors())
 app.use(express.static(__dirname + '/static'))
+
+// mongoose setup 
+mongoose.Promise = require('bluebird');
+const mlabs = 'mongodb://'+process.env.MLABS_USER+':'+process.env.MLABS_PASS+'@ds161190.mlab.com:61190/habit-hackers'
+mongoose.connect(mlabs);
+
+var todoSchema = new mongoose.Schema({
+  item: String,
+  date: String,
+  done: Boolean
+});
+var Todo = mongoose.model("todo", todoSchema);
+
+Todo({
+  item: 'this is a test',
+  date: 'today',
+  done: false
+}).save(err => err ? console.log(err) : null)
 
 // Authentication middleware.
 const authenticate = jwt({

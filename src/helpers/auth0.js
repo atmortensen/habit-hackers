@@ -22,11 +22,17 @@ export class Auth0 extends Component {
     this.login = this.login.bind(this)
     this.logout = this.logout.bind(this)
     this.loggedIn = this.loggedIn.bind(this)
+    this.getProfile = this.getProfile.bind(this)
   }
 
   _doAuthentication(authResult) {
     // Saves the user token
     this.setToken(authResult.idToken)
+
+    this.lock.getProfile(authResult.idToken, (error, profile) => {
+      localStorage.setItem('profile', JSON.stringify(profile))
+    })
+
     if(this.props) this.props.history.push('/')
   }
 
@@ -51,9 +57,16 @@ export class Auth0 extends Component {
     return localStorage.getItem('id_token')
   }
 
+  getProfile() {
+    // Retrieves the profile data from local storage
+    const profile = localStorage.getItem('profile')
+    return profile ? JSON.parse(localStorage.profile) : {}
+  }
+
   logout() {
     // Clear user token and profile data from local storage
     localStorage.removeItem('id_token')
+    localStorage.removeItem('profile')
     window.location.replace('/login')
   }
 
