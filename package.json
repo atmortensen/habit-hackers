@@ -1,0 +1,30 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "auth0-lock": "^10.14.0",
+    "dotenv": "^4.0.0",
+    "events": "^1.1.1",
+    "express": "^4.15.2",
+    "express-jwt": "^5.1.0",
+    "jwt-decode": "^2.2.0",
+    "prop-types": "^15.5.8",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.0"
+  },
+  "devDependencies": {
+    "auth0-react-scripts": "0.6.20",
+    "eslint": "^3.19.0",
+    "eslint-plugin-react": "^6.10.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:3001"
+}
