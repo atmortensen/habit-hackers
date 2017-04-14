@@ -14,7 +14,7 @@ export default class Layout extends Component {
       <div>
         <ul>
           <li><Link to="/">Habit Hackers</Link></li>
-          <li><Link to="/ideas">Ideas</Link></li>
+          <li><Link to="/inspiration">Inspiration</Link></li>
           <li><LoginDashboard /></li>
         </ul>
         {this.props.children}

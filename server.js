@@ -1,38 +1,19 @@
 const express = require('express')
 const app = express()
-const jwt = require('express-jwt')
+const bodyParser = require('body-parser')
 const cors = require('cors')
-const mongoose = require('mongoose')
-require('dotenv').config()
 
+const authenticate = require('./server/jwtAuth.js')
+const habitIdeaCtrl = require('./server/habitIdeaCtrl.js')
+
+app.use(bodyParser.json())
 app.use(cors())
 app.use(express.static(__dirname + '/static'))
 
-// mongoose setup 
-mongoose.Promise = require('bluebird');
-const mlabs = 'mongodb://'+process.env.MLABS_USER+':'+process.env.MLABS_PASS+'@ds161190.mlab.com:61190/habit-hackers'
-mongoose.connect(mlabs);
-
-var todoSchema = new mongoose.Schema({
-  item: String,
-  date: String,
-  done: Boolean
-});
-var Todo = mongoose.model("todo", todoSchema);
-
-// Todo({
-//   item: 'this is a test',
-//   date: 'today',
-//   done: false
-// }).save(err => err ? console.log(err) : null)
-
-// Authentication middleware.
-const authenticate = jwt({
-  secret: process.env.AUTH0_CLIENT_SECRET,
-  audience: process.env.AUTH0_CLIENT_ID,
-  issuer: `https://${process.env.AUTH0_DOMAIN}/`,
-  algorithms: ['HS256']
-})
+// Inspiration/Ideas Endpoints
+app.get('/api/ideas', habitIdeaCtrl.findAll)
+app.post('/api/ideas', habitIdeaCtrl.createNew)
+app.delete('/api/ideas/:id', habitIdeaCtrl.remove)
 
 app.get('/api/public', function(req, res) {
   res.json({ message: "Hello from a public endpoint! You don't need to be authenticated to see this." })
@@ -50,3 +31,5 @@ app.get('*', function(req, res) {
 app.listen(3001, function(){
   console.log('Listening on http://localhost:3001')
 })
+
+module.exports = app

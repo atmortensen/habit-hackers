@@ -3,7 +3,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
 import Layout from './layout'
 import Home from './views/home/home'
-import Ideas from './views/ideas/ideas'
+import Inspiration from './views/inspiration/inspiration'
 import Dashboard from './views/dashboard/dashboard'
 import {Auth0} from './helpers/auth0'
 
@@ -14,8 +14,8 @@ export default class Routes extends Component {
           <Layout>
           
             <Switch>
-              <Route exact path='/' component={Home} />  
-              <Route path="/ideas" component={Ideas} />
+              <Route exact path='/' component={Home} />
+              <Route path="/inspiration" component={Inspiration} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/auth0" component={Auth0} />
               <Route render={function () {
