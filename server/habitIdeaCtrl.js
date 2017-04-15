@@ -21,15 +21,21 @@ exports.createNew = function(req, res){
 		idea: req.body.idea,
 		likes: [],
 		approved: false
-	}, function(err, idea){
-		err ? console.log(err) :
-			res.status(200).json({idea})
+	}, function(err){
+		if(err) 
+			console.log(err) 
+		else {
+			HabitIdea.find({}, function(err, ideas){
+				err ? console.log(err) :
+					res.status(200).json({ideas})
+			})
+		}
 	})
 }
 
 exports.remove = function(req, res){
 	console.log(req.params.id)
-	HabitIdea.find({ _id: req.params.id }).remove(function(err, idea){
+	HabitIdea.find({ _id: req.params.id }).remove(function(err){
 		if(err) 
 			console.log(err) 
 		else {

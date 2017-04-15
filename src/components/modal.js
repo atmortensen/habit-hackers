@@ -15,13 +15,14 @@ export default class Modal extends Component {
 		this.openModal = this.openModal.bind(this)
 	}
 
-	closeModal(){
+	closeModal(fromProp){
 		this.setState({
 			opacity: 0, 
 			pointerEvents: 'none',
 			marginTop: '-50px'
 		})
-		this.props.hideModal()
+		if(!fromProp)
+			this.props.hideModal()
 	}
 
 	openModal(){
@@ -35,6 +36,8 @@ export default class Modal extends Component {
 	componentWillReceiveProps(newProps) {
 		if(newProps.display){
 			this.openModal()
+		} else {
+			this.closeModal(true)
 		}
 	}
 

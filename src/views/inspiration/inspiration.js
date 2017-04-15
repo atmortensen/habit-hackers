@@ -16,7 +16,8 @@ export default class Inspiration extends Component {
 
     this.removeIdea = this.removeIdea.bind(this)
     this.showModal = this.showModal.bind(this)
-		this.hideModal = this.hideModal.bind(this)
+    this.hideModal = this.hideModal.bind(this)
+		this.updateIdeas = this.updateIdeas.bind(this)
 	}
 
 	componentDidMount(){
@@ -40,16 +41,25 @@ export default class Inspiration extends Component {
     this.setState({showModal: false})
   }
 
+  updateIdeas(ideas){
+    this.setState({ideas: ideas})
+  }
+
   render() {
     return (
       <div>
         <h1>Inspiration</h1>
+        <h3>Take a look at some of the habits that other people have been working on using Habit Hackers.</h3>
         <input 
         	type="text"
           onChange={this.searchHandler.bind(this)}
           value={this.state.search} />
         <button onClick={this.showModal}>New Habit</button>
-        <NewIdeaModal hideModal={this.hideModal} display={this.state.showModal} />
+        <NewIdeaModal 
+          ideas={this.state.ideas} 
+          hideModal={this.hideModal} 
+          display={this.state.showModal} 
+          updateIdeas={this.updateIdeas} />
         <IdeasList 
         	ideas={this.state.ideas} 
         	remove={this.removeIdea}

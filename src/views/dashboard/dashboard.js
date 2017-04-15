@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import auth from '../../helpers/auth0'
-import axios from 'axios'
+import axios from '../../helpers/axios'
 
 export default class Dashboard extends Component {
 	constructor(){
@@ -15,13 +15,8 @@ export default class Dashboard extends Component {
 	componentDidMount(){
 		const _this = this
 		_this.setState({profile: auth.getProfile().name})
-		
 
-		const config = {
-			headers: {'Authorization': 'Bearer ' + localStorage.getItem('id_token')}
-		}
-
-		axios.get('http://localhost:3001/api/private', config)
+		axios().get('http://localhost:3001/api/private')
 		.then(function (response) {
 			_this.setState({message: response.data.message})
 		})

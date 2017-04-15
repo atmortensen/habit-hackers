@@ -1,6 +1,7 @@
 import Auth0Lock from 'auth0-lock'
 import React, {Component} from 'react'
 import { isTokenExpired } from './token-helper'
+import Loading from '../components/loading'
 
 export class Auth0 extends Component {
   constructor() {
@@ -68,7 +69,7 @@ export class Auth0 extends Component {
   }
 
   render(){
-    return <p>LOADING...</p>
+    return <Loading />
   }
 
 }
