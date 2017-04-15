@@ -13,7 +13,7 @@ app.use(express.static(__dirname + '/static'))
 // Inspiration/Ideas Endpoints
 app.get('/api/ideas', habitIdeaCtrl.findAll)
 app.post('/api/ideas', habitIdeaCtrl.createNew)
-app.delete('/api/ideas/:id', habitIdeaCtrl.remove)
+app.delete('/api/ideas/:id', authenticate, habitIdeaCtrl.remove)
 
 app.get('/api/public', function(req, res) {
   res.json({ message: "Hello from a public endpoint! You don't need to be authenticated to see this." })

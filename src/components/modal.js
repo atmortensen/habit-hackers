@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import '../css/modal.css'
 
 export default class Modal extends Component {
-	constructor(props){
-		super(props)
+	constructor(){
+		super()
 
 		this.state = {
 			opacity: 0,
@@ -21,6 +21,7 @@ export default class Modal extends Component {
 			pointerEvents: 'none',
 			marginTop: '-50px'
 		})
+		this.props.hideModal()
 	}
 
 	openModal(){
@@ -32,10 +33,8 @@ export default class Modal extends Component {
 	}
 
 	componentWillReceiveProps(newProps) {
-		if(newProps.display===1){
+		if(newProps.display){
 			this.openModal()
-		} else {
-			this.closeModal()
 		}
 	}
 
@@ -55,7 +54,7 @@ export default class Modal extends Component {
 					<div 
 						className="close"
 						onClick={this.closeModal}>
-						X
+						x
 					</div>
 					{this.props.children}
 				</div>

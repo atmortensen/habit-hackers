@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import auth from './helpers/auth0'
+import './css/main.css'
 
 function LoginDashboard(){
   return auth.loggedIn() ? 

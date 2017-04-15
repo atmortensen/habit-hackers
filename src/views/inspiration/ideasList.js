@@ -1,29 +1,43 @@
-import React from 'react'
+import React, {Component} from 'react'
 import Loading from '../../components/loading'
 // import levenshtein from 'fast-levenshtein'
 
-const IdeasList = function(props){
-	if(!props.ideas) return <Loading /> 
+export default class IdeasList extends Component {
+	constructor(){
+		super()
 
-	let list = props.ideas.filter((idea) => {
-		return idea.idea.indexOf(props.search)!==-1 ? true: false
-	}).map((idea) => {
-		return (
-			<li 
-				key={idea._id}>
-				{idea.idea}
-				<a 
-					href="#" 
-					onClick={props.remove.bind(null, idea._id)}>
-					X
-				</a>
-			</li>
-		)
-  })
+		this.state = {
+			ready: false
+		}
+	}
 
-	if(list.length===0) list = <li>No Results</li>
+	componentDidMount(){
+		setTimeout(()=>{
+			this.setState({ready: true})
+		}, 1000)
+	}
 
-	return <ul>{list}</ul>
+	render(){
+		if(!this.props.ideas || !this.state.ready) return <Loading /> 
+		let list = this.props.ideas.filter((idea) => {
+			return idea.idea.indexOf(this.props.search)!==-1 ? true: false
+		}).map((idea) => {
+			return (
+				<li 
+					key={idea._id}>
+					{idea.idea}
+					<a 
+						href="#" 
+						onClick={this.props.remove.bind(null, idea._id)}>
+						X
+					</a>
+				</li>
+			)
+	  })
+
+		if(list.length===0) list = <li>No Results</li>
+
+		return <ul>{list}</ul>
+	}
+	
 }
-
-export default IdeasList

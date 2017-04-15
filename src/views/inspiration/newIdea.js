@@ -4,7 +4,7 @@ import Modal from '../../components/modal'
 export default class NewIdeaModal extends Component {
   render() {
     return (
-      <Modal display={this.props.display}>
+      <Modal hideModal={this.props.hideModal} display={this.props.display}>
         Test
       </Modal>
     )

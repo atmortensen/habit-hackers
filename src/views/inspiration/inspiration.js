@@ -11,11 +11,12 @@ export default class Inspiration extends Component {
 		this.state = {
 			ideas: null,
 			search: '',
-      showModal: 0
+      showModal: false
 		}
 
     this.removeIdea = this.removeIdea.bind(this)
-		this.showModal = this.showModal.bind(this)
+    this.showModal = this.showModal.bind(this)
+		this.hideModal = this.hideModal.bind(this)
 	}
 
 	componentDidMount(){
@@ -32,7 +33,11 @@ export default class Inspiration extends Component {
   }
 
   showModal(){
-    this.setState({showModal: 1})
+    this.setState({showModal: true})
+  }
+
+  hideModal(){
+    this.setState({showModal: false})
   }
 
   render() {
@@ -44,7 +49,7 @@ export default class Inspiration extends Component {
           onChange={this.searchHandler.bind(this)}
           value={this.state.search} />
         <button onClick={this.showModal}>New Habit</button>
-        <NewIdeaModal display={this.state.showModal} />
+        <NewIdeaModal hideModal={this.hideModal} display={this.state.showModal} />
         <IdeasList 
         	ideas={this.state.ideas} 
         	remove={this.removeIdea}
