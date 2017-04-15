@@ -6,7 +6,7 @@ import './css/main.css'
 function LoginDashboard(){
   return auth.loggedIn() ? 
     <Link to="/dashboard">Dashboard</Link> :
-    <Link to="" onClick={auth.login.bind(this)}>Login</Link>
+    <Link to="#" onClick={auth.login.bind(this)}>Login</Link>
 }
 
 export default class Layout extends Component {

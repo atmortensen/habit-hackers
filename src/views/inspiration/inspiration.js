@@ -49,7 +49,7 @@ export default class Inspiration extends Component {
     return (
       <div>
         <h1>Inspiration</h1>
-        <h3>Take a look at some of the habits that other people have been working on using Habit Hackers.</h3>
+        <h3>Take a look at some of the habits that other people have been tracking using Habit Hackers.</h3>
         <input 
         	type="text"
           onChange={this.searchHandler.bind(this)}

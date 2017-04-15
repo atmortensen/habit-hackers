@@ -10,7 +10,8 @@ export class Auth0 extends Component {
     this.lock = new Auth0Lock('7cwpdzgLqT9h0Y5qTCh4GZDOVtGqGu61', 'mortensen.auth0.com', {
       auth: {
         redirectUrl: 'http://localhost:3000/auth0',
-        responseType: 'token'
+        responseType: 'token',
+        params: {scope: 'openid email name'}
       },
       allowedConnections: ['google-oauth2', 'facebook']
     })

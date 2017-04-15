@@ -6,28 +6,37 @@ export default class Loading extends Component {
 		super()
 
 		this.state = {
-			loading: 'loading'
+			loading: 'loading',
+			error: ''
 		}
 	}
 
 	componentDidMount(){
-		const _this = this
-		this.addDot = setInterval(function(){
-			if(_this.state.loading.length>12)
-				_this.setState({loading: 'loading'})
+		// const _this = this
+
+		this.addDot = setInterval(()=>{
+			if(this.state.loading.length>12)
+				this.setState({loading: 'loading'})
 			else
-				_this.setState({loading: _this.state.loading+=' .'})
+				this.setState({loading: this.state.loading+' .'})
 		}, 400)
+
+		this.timeOut = setTimeout(()=>{
+			this.setState({error: 'Taking longer than usual to load. Try refreshing the page and making sure you\'re logged in.'
+			})
+		}, 4000)
 	}
 
 	componentWillUnmount(){
 		clearInterval(this.addDot)
+		clearInterval(this.timeOut)
 	}
 	
 	render(){
 		return (
 			<div className="loading-wrapper">
 				<h2>{this.state.loading}</h2>
+				<h3>{this.state.error}</h3>
 			</div>
 		)
 	}
