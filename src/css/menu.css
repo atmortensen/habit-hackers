@@ -3,4 +3,43 @@
 	width: 100%;
 	background: #FFF;
 	position: fixed;
+	box-shadow: 0px 3px 15px 0px rgba(0,0,0,0.65);
+}
+
+.menu {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	position: relative;
+}
+
+.menu li {
+	padding: 7px;
+	margin: 15px;
+	border: 3px solid transparent;
+}
+
+.menu a {
+	text-decoration: none;
+	color: inherit;
+	letter-spacing: 1.5px;
+	font-size: 24px;
+}
+
+.menu a:not(.logo):hover {
+	color: #60709f;
+}
+
+.menu .logo li {
+	border: 3px solid #000;
+}
+
+.menu .logo li:hover {
+	border-color: #60709f;
+	color: #60709f;
+}
+
+.menu .login-logout {
+	position: absolute;
+	right: 0;
 }

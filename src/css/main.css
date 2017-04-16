@@ -3,6 +3,12 @@ html, body {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	letter-spacing: 1px;
+	background: #303850;
+}
+
+.spacer {
+	height: 75px;
 }
 
 h1, h2, h3, p {

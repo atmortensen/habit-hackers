@@ -7,6 +7,7 @@ export default class Layout extends Component {
     return (
       <div>
         <Menu />
+        <div className="spacer"></div>
         {this.props.children}
       </div>
     )

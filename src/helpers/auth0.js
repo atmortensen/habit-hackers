@@ -13,6 +13,12 @@ export class Auth0 extends Component {
         responseType: 'token',
         params: {scope: 'openid email name'}
       },
+      theme: {
+        logo: 'http://i.imgur.com/MvY84lh.png'
+      },
+      languageDictionary: {
+        title: 'Habit Hackers Login'
+      },
       allowedConnections: ['google-oauth2', 'facebook']
     })
     // Add callback for lock `authenticated` event

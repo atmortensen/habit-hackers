@@ -3,10 +3,10 @@ import {Link} from 'react-router-dom'
 import auth from '../helpers/auth0'
 import '../css/menu.css'
 
-function LoginDashboard(){
+function LoginLogout(){
   return auth.loggedIn() ? 
-    <Link to="#" onClick={auth.logout}>Logout</Link> :
-    <Link to="#" onClick={auth.login}>Login</Link>
+    <Link to="#" onClick={auth.logout}><li className="login-logout">Logout</li></Link> :
+    <Link to="#" onClick={auth.login}><li className="login-logout">Login</li></Link>
 }
 
 export default class Layout extends Component {
@@ -14,9 +14,9 @@ export default class Layout extends Component {
     return (
       <div className="menu-container">
         <ul className="menu container">
-          <li><Link to="/">Habit Hackers</Link></li>
-          <li><Link to="/dashboard">Dashboard</Link></li>
-          <li><LoginDashboard /></li>
+          <Link to="/" className="logo"><li>Habit Hackers</li></Link>
+          <Link to="/dashboard"><li>Dashboard</li></Link>
+          <LoginLogout />
         </ul>
       </div>
     )
