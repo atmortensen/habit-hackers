@@ -57,7 +57,7 @@ export default class Inspiration extends Component {
         <button onClick={this.showModal}>New Habit</button>
         <NewIdeaModal 
           ideas={this.state.ideas} 
-          hideModal={this.hideModal} 
+          changeModalState={this.hideModal} 
           display={this.state.showModal} 
           updateIdeas={this.updateIdeas} />
         <IdeasList 

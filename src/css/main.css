@@ -1,8 +1,16 @@
-html {
+html, body {
 	font-family: 'Raleway', sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 h1, h2, h3, p {
 	margin: 0;
 	line-height: 140%;
+}
+
+.container {
+	width: 1000px;
+	margin: auto;
 }

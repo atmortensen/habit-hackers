@@ -64,9 +64,9 @@ export class Auth0 extends Component {
 
   logout() {
     // Clear user token and profile data from local storage
+    window.location.replace('/')
     localStorage.removeItem('id_token')
     localStorage.removeItem('profile')
-    window.location.replace('/')
   }
 
   render(){
