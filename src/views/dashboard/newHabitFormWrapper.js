@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import moment from 'moment'
 import NewHabitForm from './newHabitForm'
+import * as endpoints from '../../helpers/endpoints'
 
 export default class NewHabitFormWrapper extends Component {
 	constructor(){
@@ -9,11 +9,12 @@ export default class NewHabitFormWrapper extends Component {
 		this.state = {
 			title: '',
 			description: '',
-			startDate: moment(),
-			endDate: moment(),
+			startDate: '',
+			endDate: '',
 			teamEmails: ['', '', ''],
 			teamEmailsCount: 3,
-			reward: ''
+			reward: '',
+			noEnd: false
 		}
 	}
 
@@ -29,16 +30,17 @@ export default class NewHabitFormWrapper extends Component {
     this.setState({ reward: e.target.value })
   }
 
-  reset(e){
+  reset(){
   	if(confirm('Are you sure you want to reset and lose unsaved changes?')){
 	    this.setState({
 				title: '',
 				description: '',
-				startDate: moment(),
-				endDate: moment(),
+				startDate: '',
+				endDate: '',
 				teamEmails: ['', '', ''],
 				teamEmailsCount: 3,
-				reward: ''
+				reward: '',
+				noEnd: false
 			})
   	}
   }
@@ -49,7 +51,7 @@ export default class NewHabitFormWrapper extends Component {
   	this.setState({ teamEmails: teamEmails })
   }
 
-  addEmailField(e){
+  addEmailField(){
   	let teamEmails = this.state.teamEmails
   	teamEmails.push('')
   	this.setState({ 
@@ -64,6 +66,18 @@ export default class NewHabitFormWrapper extends Component {
 
   endDateHandler(e){
   	this.setState({ endDate: e })
+  }
+
+  submit(){
+  	endpoints.createHabit(this.state)
+  	this.props.hide()
+  }
+
+  noEndHandler(e){
+  	this.setState({
+  		noEnd: e.target.checked,
+  		endDate: ''
+  		})
   }
 
 	render(){
@@ -83,7 +97,10 @@ export default class NewHabitFormWrapper extends Component {
 				startDate={this.state.startDate}
 				startDateHandler={this.startDateHandler.bind(this)}
 				endDate={this.state.endDate}
-				endDateHandler={this.endDateHandler.bind(this)} />
+				endDateHandler={this.endDateHandler.bind(this)}
+				submit={this.submit.bind(this)}
+				noEndHandler={this.noEndHandler.bind(this)}
+				noEnd={this.state.noEnd} />
 		)
 	}
 }

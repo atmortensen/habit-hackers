@@ -3,28 +3,25 @@ import auth from '../../helpers/auth0'
 import Modal from '../../components/modal'
 import RandomQuote from '../../components/randomQuote'
 import NewHabitForm from './newHabitFormWrapper'
-
-import axios from '../../helpers/axios'
+import * as endpoints from '../../helpers/endpoints'
 
 export default class Dashboard extends Component {
 	constructor(){
 		super()
 
 		this.state = {
-			message: null,
 			profile: null,
 			displayModal: false,
-			formStarted: false
+			formStarted: false,
+			habits: []
 		}
 	}
 
 	componentDidMount(){
-		const _this = this
-		_this.setState({profile: auth.getProfile().name})
+		this.setState({profile: auth.getProfile().name})
 
-		axios().get('http://localhost:3001/api/private')
-		.then(function (response) {
-			_this.setState({message: response.data.message})
+		endpoints.findHabits().then((response)=>{
+			this.setState({habits: response.habits})
 		})
 		
 	}
@@ -44,7 +41,6 @@ export default class Dashboard extends Component {
     	return (
 	      <div className="container" >
 	        <RandomQuote />
-	        <h3>{this.state.message}</h3>
 	        <p>{JSON.stringify(this.state.profile)}</p>
 	        <button 
 	        	onClick={this.showModal.bind(this)}>
@@ -53,8 +49,9 @@ export default class Dashboard extends Component {
 	        <Modal 
 	        	hideFn={this.hideModal.bind(this)} 
 	        	display={this.state.displayModal}>
-	        	<NewHabitForm />
+	        	<NewHabitForm hide={this.hideModal.bind(this)} />
 	        </Modal>
+
 	      </div>
 	    )
     }

@@ -2,6 +2,7 @@ import React from 'react'
 import _ from 'lodash'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.min.css'
+import './newHabitForm.css'
 
 function NewHabitForm(props){
 	function emailInputs(){
@@ -22,13 +23,15 @@ function NewHabitForm(props){
 
 	return (
 		<form>
-			<h2>New Habit</h2>
+			<h2>Start tracking a new habit...</h2>
 			<p>
+				Habit Title:
 				<input 
 					type="text"
-					placeholder="Title"
+					placeholder="e.g. Don't use social media for a month. Go to the gym everyday."
 					onChange={props.titleHandler}
           value={props.title} />
+          A good habit is something trackable. "Be healthier" isn't a good goal because it's not trackable. Instead, you should choose something like "Eat a healthy breakfast everyday".
 			</p>
 			<p>
 				<textarea
@@ -39,19 +42,29 @@ function NewHabitForm(props){
         </textarea> 
 			</p>
 			<DatePicker
-					selectsStart
-					startDate={props.startDate}
-			    endDate={props.endDate}
-			    selected={props.startDate}
-			    onChange={props.startDateHandler}
+				placeholderText="Start Date"
+				todayButton="Today"
+				selectsStart
+				startDate={props.startDate}
+		    endDate={props.endDate}
+		    selected={props.startDate}
+		    onChange={props.startDateHandler}
 			/>
 			<DatePicker
-					selectsEnd
-					startDate={props.startDate}
-					endDate={props.endDate}
-			    selected={props.endDate}
-			    onChange={props.endDateHandler}
+				placeholderText="End Date"
+				todayButton="Today"
+				selectsEnd
+				startDate={props.startDate}
+				endDate={props.endDate}
+		    selected={props.endDate}
+		    onChange={props.endDateHandler}
+		    disabled={props.noEnd}
 			/>
+			No end date 
+			<input 
+				type="checkbox" 
+				onChange={props.noEndHandler} 
+				checked={props.noEnd} />
 			<p>Invite Team Members</p>
 			{emailInputs()}
 			<button 
@@ -69,7 +82,13 @@ function NewHabitForm(props){
 			</p>
 			<button 
 				type="button"
-				onClick={props.reset}>Reset
+				onClick={props.submit}>
+				Submit
+			</button>
+			<button 
+				type="button"
+				onClick={props.reset}>
+				Reset
 			</button>
 			
 		</form>

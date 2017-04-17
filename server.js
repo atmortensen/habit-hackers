@@ -4,20 +4,15 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 
 const authenticate = require('./server/jwtAuth.js')
-const habitIdeaCtrl = require('./server/habitIdeaCtrl.js')
+const databaseCtrl = require('./server/databaseCtrl.js')
 
 app.use(bodyParser.json())
 app.use(cors())
 app.use(express.static(__dirname + '/static'))
 
-// Inspiration/Ideas Endpoints
-app.get('/api/ideas', habitIdeaCtrl.findAll)
-app.post('/api/ideas', habitIdeaCtrl.createNew)
-app.delete('/api/ideas/:id', authenticate, habitIdeaCtrl.remove)
+app.get('/api/habits', authenticate, databaseCtrl.findAll)
+app.post('/api/habits', authenticate, databaseCtrl.createNew)
 
-app.get('/api/public', function(req, res) {
-  res.json({ message: "Hello from a public endpoint! You don't need to be authenticated to see this." })
-})
 
 app.get('/api/private', authenticate, function(req, res) {
   console.log(req.user)

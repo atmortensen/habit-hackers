@@ -15,12 +15,16 @@
 	position: relative;
 }
 
-.cover .circle {
+.cover .down {
 	color: #FFF;
 	text-shadow: 0px 0px 15px rgba(0, 0, 0, 1);
 	position: absolute;
 	bottom: 0;
 	font-size: 60px;
+}
+
+.cover .down:hover {
+	color: #999;
 }
 
 .coverText {
