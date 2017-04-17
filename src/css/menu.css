@@ -1,4 +1,5 @@
 .menu-container {
+	z-index: 99;
 	margin: 0;
 	width: 100%;
 	background: #FFF;
@@ -20,23 +21,16 @@
 }
 
 .menu a {
-	text-decoration: none;
-	color: inherit;
 	letter-spacing: 1.5px;
 	font-size: 24px;
-}
-
-.menu a:not(.logo):hover {
-	color: #60709f;
 }
 
 .menu .logo li {
 	border: 3px solid #000;
 }
 
-.menu .logo li:hover {
-	border-color: #60709f;
-	color: #60709f;
+.menu .logo:hover li {
+	border-color: #999;
 }
 
 .menu .login-logout {

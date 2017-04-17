@@ -1,6 +1,16 @@
 import React, {Component} from 'react'
+import $ from 'jquery'
 
 export default class Cover extends Component {
+
+  componentDidMount(){
+    $('.circle').click(()=>{
+      $('html, body').animate({
+          scrollTop: $('#anchor').offset().top
+      }, 500)
+    })
+  }
+
   render() {
     return (
       <div 
@@ -8,8 +18,11 @@ export default class Cover extends Component {
       	<div className="coverText">
 	      	<h1>Habit Hackers</h1>
 	      	<div className="break"></div>
-	      	<h2>Create good habits and break bad ones as a team.</h2>
+	      	<h2>Work as a team to create good habits or break bad ones.</h2>
       	</div>
+        <a href="#" className="circle">
+          <i className="fa fa-angle-double-down"></i>
+        </a>
       </div>
     )
   }

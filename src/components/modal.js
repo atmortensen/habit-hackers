@@ -31,10 +31,6 @@ export default class Modal extends Component {
 		})
 	}
 
-	// changeStateToClose(){
-
-	// }
-
 	componentWillReceiveProps(newProps) {
 		if(newProps.display){
 			this.openModal()
@@ -58,10 +54,12 @@ export default class Modal extends Component {
 					}}>
 					<div 
 						className="close"
-						onClick={this.props.changeState}>
+						onClick={this.props.hideFn}>
 						x
 					</div>
-					{this.props.children}
+					<div className="content">
+						{this.props.children}
+					</div>
 				</div>
 			</div>
 		)

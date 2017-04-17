@@ -21,6 +21,12 @@
 	transition: .3s margin-top;
 }
 
+.modal-wrap .modal .content {
+	max-height: 80vh;
+	overflow: auto;
+	padding: 15px;
+}
+
 .modal-wrap .modal .close {
 	text-align: center;
 	cursor: pointer;

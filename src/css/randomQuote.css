@@ -1,0 +1,15 @@
+.quote {
+	padding: 20px;
+	text-align: center;
+}
+
+.quote .quoteText {
+	font-size: 25px;
+}
+
+.quote .author {
+	font-size: 18px;
+	font-weight: bold;
+	padding-top: 10px;
+
+}

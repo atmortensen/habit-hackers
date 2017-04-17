@@ -4,7 +4,7 @@ html, body {
 	padding: 0;
 	box-sizing: border-box;
 	letter-spacing: 1px;
-	background: #303850;
+	background: #f2f2f2;
 }
 
 .spacer {
@@ -19,4 +19,13 @@ h1, h2, h3, p {
 .container {
 	width: 1000px;
 	margin: auto;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+a:hover {
+	color: #999;
 }

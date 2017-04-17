@@ -12,6 +12,15 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	position: relative;
+}
+
+.cover .circle {
+	color: #FFF;
+	text-shadow: 0px 0px 15px rgba(0, 0, 0, 1);
+	position: absolute;
+	bottom: 0;
+	font-size: 60px;
 }
 
 .coverText {
@@ -42,3 +51,4 @@
 	font-size: 30px;
 	line-height: 120%;
 }
+

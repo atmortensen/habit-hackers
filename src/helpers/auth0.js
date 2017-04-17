@@ -17,7 +17,7 @@ export class Auth0 extends Component {
         logo: 'http://i.imgur.com/MvY84lh.png'
       },
       languageDictionary: {
-        title: 'Habit Hackers Login'
+        title: 'Habit Hackers'
       },
       allowedConnections: ['google-oauth2', 'facebook']
     })
