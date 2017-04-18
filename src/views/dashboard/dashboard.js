@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import auth from '../../helpers/auth0'
 import Modal from '../../components/modal'
 import RandomQuote from '../../components/randomQuote'
-import NewHabitForm from './newHabitFormWrapper'
+import HabitForm from './habitForm/habitFormWrapper'
+import MyHabits from './myHabits/myHabits'
 import * as endpoints from '../../helpers/endpoints'
 
 export default class Dashboard extends Component {
@@ -13,7 +14,7 @@ export default class Dashboard extends Component {
 			profile: null,
 			displayModal: false,
 			formStarted: false,
-			habits: []
+			habits: null
 		}
 	}
 
@@ -49,9 +50,9 @@ export default class Dashboard extends Component {
 	        <Modal 
 	        	hideFn={this.hideModal.bind(this)} 
 	        	display={this.state.displayModal}>
-	        	<NewHabitForm hide={this.hideModal.bind(this)} />
+	        	<HabitForm hide={this.hideModal.bind(this)} />
 	        </Modal>
-
+	        <MyHabits habits={this.state.habits} />
 	      </div>
 	    )
     }

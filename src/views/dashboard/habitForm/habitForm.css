@@ -1,0 +1,49 @@
+.habitForm input, .habitForm textarea {
+	width: 100%;	
+}
+
+.habitForm textarea {
+	resize: none;
+	overflow-y: hidden;
+}
+
+.habitForm h2 {
+	margin-bottom: 10px;
+}
+
+.habitForm input[type="checkbox"] {
+	position: relative;
+	top: 2px;
+	width: auto;
+}
+
+.habitForm .noEnd {
+	clear: both;
+	padding-top: 5px;
+}
+
+.habitForm .section {
+	padding: 15px;
+	margin-bottom: 10px;
+	background: #FFF;
+	box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.5);
+}
+
+.habitForm .margin-right {
+	margin-right: 15px;
+}
+
+.habitForm button {
+	margin-top: 10px;
+}
+
+.habitForm p {
+	font-weight: bold;
+}
+
+.habitForm .react-datepicker__input-container {
+	display: block;
+	width: 40%;
+	float: left;
+	margin-right: 10%;
+}

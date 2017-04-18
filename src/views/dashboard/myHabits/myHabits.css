@@ -1,0 +1,14 @@
+.myHabits .habit {
+	padding: 25px;
+	margin: 15px 0;
+	background: #FFF;
+	box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.5);
+}
+
+.DayPicker {
+	width: 266px;
+}
+
+.DayPicker:focus, .DayPicker .DayPicker-Day:focus {
+	outline: none;
+}

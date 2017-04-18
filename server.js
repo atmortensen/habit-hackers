@@ -13,12 +13,6 @@ app.use(express.static(__dirname + '/static'))
 app.get('/api/habits', authenticate, databaseCtrl.findAll)
 app.post('/api/habits', authenticate, databaseCtrl.createNew)
 
-
-app.get('/api/private', authenticate, function(req, res) {
-  console.log(req.user)
-  res.json({ message: "If you can see this, the server knows you're logged in!" })
-})
-
 app.get('*', function(req, res) {
   res.sendFile(__dirname + '/static/index.html') 
 })
@@ -26,5 +20,3 @@ app.get('*', function(req, res) {
 app.listen(3001, function(){
   console.log('Listening on http://localhost:3001')
 })
-
-module.exports = app

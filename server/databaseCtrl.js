@@ -1,4 +1,3 @@
-// const app = require('../server.js')
 const mongoose = require('./mongoConnect.js')
 exports = module.exports = {}
 

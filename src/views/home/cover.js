@@ -6,7 +6,7 @@ export default class Cover extends Component {
   componentDidMount(){
     $('.down').click(()=>{
       $('html, body').animate({
-          scrollTop: $('#anchor').offset().top
+          scrollTop: $('#anchor').offset().top-75
       }, 500)
     })
   }

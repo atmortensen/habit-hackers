@@ -1,21 +1,61 @@
 import React, {Component} from 'react'
-import NewHabitForm from './newHabitForm'
-import * as endpoints from '../../helpers/endpoints'
+import HabitForm from './habitForm'
+import * as endpoints from '../../../helpers/endpoints'
+import $ from 'jquery'
+import moment from 'moment'
 
 export default class NewHabitFormWrapper extends Component {
-	constructor(){
-		super()
+	constructor(props){
+		super(props)
 
-		this.state = {
-			title: '',
-			description: '',
-			startDate: '',
-			endDate: '',
-			teamEmails: ['', '', ''],
-			teamEmailsCount: 3,
-			reward: '',
-			noEnd: false
+		let originalState;
+		if(this.props.habit){
+			originalState = {
+				head: 'Edit habit...',
+				title: this.props.habit.title,
+				description: this.props.habit.description,
+				startDate: moment(this.props.habit.startDate),
+				endDate: this.props.habit.endDate ? moment(this.props.habit.endDate) : '',
+				teamEmails: ['', '', ''].slice(),
+				teamEmailsCount: 3,
+				reward: this.props.habit.reward,
+				noEnd: this.props.habit.endDate===''
+			}
+		} else {
+			originalState = {
+				head: 'Start tracking a new habit...',
+				title: '',
+				description: '',
+				startDate: '',
+				endDate: '',
+				teamEmails: ['', '', ''].slice(),
+				teamEmailsCount: 3,
+				reward: '',
+				noEnd: false
+			}
 		}
+
+		this.state = originalState
+
+		this.reset = function(){
+	  	if(confirm('Are you sure you want to reset and lose unsaved changes?')){
+		    this.setState(originalState)
+				$('textarea').each(function () {
+				  	this.style.height = 'auto'
+				    this.style.height = (this.scrollHeight) + 'px'
+				})
+	  	}
+  	}
+	}
+
+	componentDidMount(){
+		$('textarea').each(function () {
+			this.style.height = 'auto'
+		  this.style.height = (this.scrollHeight) + 'px'
+		}).on('input', function () {
+		  this.style.height = 'auto'
+		  this.style.height = (this.scrollHeight) + 'px'
+		})
 	}
 
 	titleHandler(e){
@@ -30,20 +70,7 @@ export default class NewHabitFormWrapper extends Component {
     this.setState({ reward: e.target.value })
   }
 
-  reset(){
-  	if(confirm('Are you sure you want to reset and lose unsaved changes?')){
-	    this.setState({
-				title: '',
-				description: '',
-				startDate: '',
-				endDate: '',
-				teamEmails: ['', '', ''],
-				teamEmailsCount: 3,
-				reward: '',
-				noEnd: false
-			})
-  	}
-  }
+  
 
   teamEmailsHandler(index, e){
   	let teamEmails = this.state.teamEmails
@@ -82,9 +109,10 @@ export default class NewHabitFormWrapper extends Component {
 
 	render(){
 		return (
-			<NewHabitForm
+			<HabitForm
 				titleHandler={this.titleHandler.bind(this)}
 				title={this.state.title}
+				head={this.state.head}
 				description={this.state.description}
 				descriptionHandler={this.descriptionHandler.bind(this)}
 				addEmailField={this.addEmailField.bind(this)}

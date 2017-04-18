@@ -21,6 +21,7 @@ export default class Modal extends Component {
 			pointerEvents: 'none',
 			marginTop: '-50px'
 		})
+		document.body.style.overflow = 'auto'
 	}
 
 	openModal(){
@@ -29,6 +30,7 @@ export default class Modal extends Component {
 			pointerEvents: 'all', 
 			marginTop: ''
 		})
+		document.body.style.overflow = 'hidden'
 	}
 
 	componentWillReceiveProps(newProps) {

@@ -12,8 +12,6 @@
     "events": "^1.1.1",
     "express": "^4.15.2",
     "express-jwt": "^5.1.0",
-    "fast-levenshtein": "^2.0.6",
-    "fuse.js": "^2.6.2",
     "jquery": "^3.2.1",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
@@ -21,6 +19,7 @@
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-datepicker": "^0.46.0",
+    "react-day-picker": "^5.2.3",
     "react-dom": "^15.5.4",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.0"

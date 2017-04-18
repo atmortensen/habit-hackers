@@ -8,6 +8,7 @@
 html, body {
 	font-family: 'Raleway', sans-serif;
 	background: #f2f2f2;
+	color: #333;
 }
 
 .spacer {
@@ -27,11 +28,11 @@ h1, h2, h3, p {
 
 a {
 	text-decoration: none;
-	color: inherit;
+	color: #333;
 }
 
 a:hover {
-	color: #999;
+	color: #2580c1;
 }
 
 input:focus, textarea:focus, button:focus {
@@ -39,16 +40,25 @@ input:focus, textarea:focus, button:focus {
 }
 
 button {
-	background: none;
-	padding: 6px;
+	background: #2580c1;
+	padding: 10px 25px;
 	font-weight: bold;
 	border: none;
-	border: solid 2px #999;
-	border-radius: 3px;
+	color: #FFF;
 	cursor: pointer;
+	box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.5);
 }
 
 button:hover {
-	
+	background: #298ed6;
+}
+
+input, textarea {
+	font-family: 'Raleway', sans-serif;
+	border: none;
+	padding: 5px;
+	line-height: 100%;
+	border-bottom: solid 1px #bfbfbf;
+	font-size: 16px;
 }
 

@@ -26,11 +26,12 @@
 }
 
 .menu .logo li {
-	border: 3px solid #000;
+	border: 3px solid #333;
+	color: #2072ac;
 }
 
 .menu .logo:hover li {
-	border-color: #999;
+	/*border-color: #2580c1;*/
 }
 
 .menu .login-logout {
