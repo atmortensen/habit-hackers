@@ -1,3 +1,15 @@
-input, textarea{
+input, textarea {
 	width: 100%;
+	border: solid 2px #999;
+	padding: 5px 10px;
+	border-radius: 3px;
+	box-sizing: border-box;
+}
+
+input[type="checkbox"] {
+	width: auto;
+}
+
+p {
+	font-size: 14px;
 }

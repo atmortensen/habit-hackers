@@ -1,9 +1,12 @@
-html, body {
-	font-family: 'Raleway', sans-serif;
+* {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	letter-spacing: 1px;
+}
+
+html, body {
+	font-family: 'Raleway', sans-serif;
 	background: #f2f2f2;
 }
 
@@ -30,3 +33,22 @@ a {
 a:hover {
 	color: #999;
 }
+
+input:focus, textarea:focus, button:focus {
+	outline: none;
+}
+
+button {
+	background: none;
+	padding: 6px;
+	font-weight: bold;
+	border: none;
+	border: solid 2px #999;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+button:hover {
+	
+}
+

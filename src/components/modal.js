@@ -27,7 +27,7 @@ export default class Modal extends Component {
 		this.setState({
 			opacity: 1, 
 			pointerEvents: 'all', 
-			marginTop: 0
+			marginTop: ''
 		})
 	}
 

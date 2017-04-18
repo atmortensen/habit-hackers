@@ -22,7 +22,7 @@ function NewHabitForm(props){
   }
 
 	return (
-		<form>
+		<form className="newHabitForm">
 			<h2>Start tracking a new habit...</h2>
 			<p>
 				Habit Title:
@@ -31,12 +31,12 @@ function NewHabitForm(props){
 					placeholder="e.g. Don't use social media for a month. Go to the gym everyday."
 					onChange={props.titleHandler}
           value={props.title} />
-          A good habit is something trackable. "Be healthier" isn't a good goal because it's not trackable. Instead, you should choose something like "Eat a healthy breakfast everyday".
 			</p>
 			<p>
+				Description:
 				<textarea
 					type="text"
-					placeholder="Description"
+					placeholder="&quot;Be healthier&quot; isn't a good goal because it's not trackable. Instead, you should choose something like &quot;Eat a healthy breakfast everyday&quot;."
 					value={props.description}
 					onChange={props.descriptionHandler}>
         </textarea> 
@@ -60,17 +60,19 @@ function NewHabitForm(props){
 		    onChange={props.endDateHandler}
 		    disabled={props.noEnd}
 			/>
-			No end date 
-			<input 
-				type="checkbox" 
-				onChange={props.noEndHandler} 
-				checked={props.noEnd} />
-			<p>Invite Team Members</p>
+			<p>
+				No end date &nbsp;
+				<input 
+					type="checkbox" 
+					onChange={props.noEndHandler} 
+					checked={props.noEnd} />
+			</p>
+			<p>Invite Team Members:</p>
 			{emailInputs()}
 			<button 
 				type="button"
 				onClick={props.addEmailField}>
-				+Team Member
+				+ Team Member
 			</button>
 			<p>
 				<textarea

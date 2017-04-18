@@ -34,7 +34,7 @@ export default class Loading extends Component {
 	
 	render(){
 		return (
-			<div className="loading-wrapper">
+			<div className="loading-wrapper container">
 				<h2>{this.state.loading}</h2>
 				<h3>{this.state.error}</h3>
 			</div>
