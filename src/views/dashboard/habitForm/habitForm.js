@@ -24,7 +24,7 @@ function NewHabitForm(props){
 
 	return (
 		<form className="habitForm">
-			<h2>Start tracking a new habit...</h2>
+			<h2>{props.head}</h2>
 
 			<p>Habit Title:</p>
 			<div className="section">	
@@ -45,6 +45,7 @@ function NewHabitForm(props){
         </textarea> 
 			</div>
 
+			<p>Dates:</p>
 			<div className="section">
 				<DatePicker
 					placeholderText="Start Date"
@@ -96,7 +97,7 @@ function NewHabitForm(props){
 
 			<div>
 				<button 
-					className="margin-right"
+					className="margin-right green"
 					type="button"
 					onClick={props.submit}>
 					Submit

@@ -3,12 +3,14 @@ import HabitForm from './habitForm'
 import * as endpoints from '../../../helpers/endpoints'
 import $ from 'jquery'
 import moment from 'moment'
+import { default as swal } from 'sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
 
 export default class NewHabitFormWrapper extends Component {
 	constructor(props){
 		super(props)
 
-		let originalState;
+		let originalState
 		if(this.props.habit){
 			originalState = {
 				head: 'Edit habit...',
@@ -16,7 +18,7 @@ export default class NewHabitFormWrapper extends Component {
 				description: this.props.habit.description,
 				startDate: moment(this.props.habit.startDate),
 				endDate: this.props.habit.endDate ? moment(this.props.habit.endDate) : '',
-				teamEmails: ['', '', ''].slice(),
+				teamEmails: ['', '', ''],
 				teamEmailsCount: 3,
 				reward: this.props.habit.reward,
 				noEnd: this.props.habit.endDate===''
@@ -28,7 +30,7 @@ export default class NewHabitFormWrapper extends Component {
 				description: '',
 				startDate: '',
 				endDate: '',
-				teamEmails: ['', '', ''].slice(),
+				teamEmails: ['', '', ''],
 				teamEmailsCount: 3,
 				reward: '',
 				noEnd: false
@@ -37,14 +39,28 @@ export default class NewHabitFormWrapper extends Component {
 
 		this.state = originalState
 
-		this.reset = function(){
-	  	if(confirm('Are you sure you want to reset and lose unsaved changes?')){
+		this.reset = function(showConfirm){
+			const reset = (function(){
 		    this.setState(originalState)
+		    this.setState({teamEmails: ['', '', '']})
 				$('textarea').each(function () {
 				  	this.style.height = 'auto'
 				    this.style.height = (this.scrollHeight) + 'px'
 				})
-	  	}
+			}).bind(this)
+
+			if(showConfirm){
+				swal({
+					title: 'Are you sure?',
+				  text: 'You will lose all changes!',
+				  type: 'warning',
+				  showCancelButton: true
+				}).then(function () {
+					reset()
+				}).catch(swal.noop)
+			} else {
+				reset()
+			}
   	}
 	}
 
@@ -70,8 +86,6 @@ export default class NewHabitFormWrapper extends Component {
     this.setState({ reward: e.target.value })
   }
 
-  
-
   teamEmailsHandler(index, e){
   	let teamEmails = this.state.teamEmails
   	teamEmails[index] = e.target.value
@@ -96,7 +110,19 @@ export default class NewHabitFormWrapper extends Component {
   }
 
   submit(){
-  	endpoints.createHabit(this.state)
+  	if(!this.state.title){
+  		swal('Oops...', '"Habit Title" is a required field.', 'warning')
+  		return
+  	}
+  	if(!this.state.startDate || (!this.state.endDate && !this.state.noEnd)){
+  		swal('Oops...', 'Date fields are required.', 'warning')
+  		return
+  	}
+  	this.props.clearHabits()
+  	endpoints.createHabit(this.state).then(()=>{
+  		this.props.updateHabits('New habit tracker created successfully!')
+  	})
+  	this.reset()
   	this.props.hide()
   }
 

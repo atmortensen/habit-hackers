@@ -49,8 +49,24 @@ button {
 	box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.5);
 }
 
+button.red {
+	background: #df2020;
+}
+
+button.green {
+	background: #4CAF50;
+}
+
 button:hover {
 	background: #298ed6;
+}
+
+button.red:hover {
+	background: #e23636;
+}
+
+button.green:hover {
+	background: #5fb962;
 }
 
 input, textarea {
@@ -60,5 +76,19 @@ input, textarea {
 	line-height: 100%;
 	border-bottom: solid 1px #bfbfbf;
 	font-size: 16px;
+}
+
+.flashMessage {
+	border: solid 1px #4CAF50;
+	color: #408c40;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	padding: 5px 10px;
+	background: #dcefdc;
+	text-align: center;
+}
+
+.alignRight {
+	text-align: right;
 }
 

@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
 import Loading from '../../../components/loading'
 import './myHabits.css'
-import DayPicker from 'react-day-picker'
-import 'react-day-picker/lib/style.css'
+import Calendar from './calendar'
 import Modal from '../../../components/modal'
 import HabitForm from '../habitForm/habitFormWrapper'
-
+import auth from '../../../helpers/auth0'
+import * as endpoints from '../../../helpers/endpoints'
+import { default as swal } from 'sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
 
 export default MyHabits
 
@@ -17,7 +19,13 @@ function MyHabits(props) {
 			<div 
 				className='myHabits'>
 				{props.habits.map( (habit) => {
-					return <Habit key={habit._id} habit={habit} /> 
+					return (
+						<Habit 
+							key={habit._id} 
+							habit={habit} 
+							clearHabits={props.clearHabits} 
+							updateHabits={props.updateHabits} /> 
+					)
 				})}
 			</div>
 		)
@@ -29,20 +37,9 @@ class Habit extends Component {
 		super()
 
 		this.state = {
-			selectedDay: new Date(),
 			displayModal: false
 		}
 	}
-
-	calendarClick(day, { disabled }){
-    if (!disabled) {
-      this.setState({selectedDay: day})
-    }
-  }
-
-  goToToday(){
-  	this.daypicker.showMonth(new Date())
-  }
 
   hideModal(){
   	this.setState({displayModal: false})
@@ -52,27 +49,42 @@ class Habit extends Component {
   	this.setState({displayModal: true})
   }
 
+  removeHabit(){
+  	swal({
+  		title: 'Are you sure you want to delete?',
+  	  type: 'error',
+  	  showCancelButton: true
+  	}).then(() => {
+  		this.props.clearHabits()
+  		endpoints.removeHabit(this.props.habit._id).then(()=>{
+  			this.props.updateHabits('Successfully deleted.')
+  		})
+  	}).catch(swal.noop)
+  }
+
 	render(){
-		console.log(this.props.habit)
-		const start = new Date(this.props.habit.startDate)
-		const end = new Date(this.props.habit.endDate)
 		return (
 			<div className="habit">
 				<h2>{this.props.habit.title}</h2>
 				<p>{this.props.habit.description}</p>
 				<p>{this.props.habit.reward}</p>
-				<DayPicker 
-					ref={el => this.daypicker = el}
-					className="calendar"
-					disabledDays={[{ before: start }, { after: end }]}
-					onDayClick={this.calendarClick.bind(this)}
-					fromMonth={start}
-					selectedDays={ this.state.selectedDay }
-		      toMonth={end} />
-	      <a onClick={this.goToToday.bind(this)}>today</a>
+				<Calendar
+					startDate={this.props.habit.startDate}
+					endDate={this.props.habit.endDate} />
 				
-				<button
-					onClick={this.showModal.bind(this)}>Edit</button>
+				{auth.getProfile().user_id === this.props.habit.owner &&
+					<div className="editButtons">
+						<button
+							onClick={this.showModal.bind(this)}>
+							Edit
+						</button>
+						<button
+							className="red"
+							onClick={this.removeHabit.bind(this)}>
+							Delete
+						</button>
+					</div>
+				}
 				<Modal 
 					hideFn={this.hideModal.bind(this)} 
 					display={this.state.displayModal}>

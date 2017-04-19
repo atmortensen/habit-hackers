@@ -6,15 +6,22 @@ var habitSchema = new mongoose.Schema({
   description: String,
   startDate: String,
   endDate: String,
-  invited: Array,
+  invited: [String],
   reward: String,
   owner: String,
-  team: Array
+  team: [{
+	  name: String,
+	  email: String,
+	  id: String,
+	  calendar: [{
+	  	day: String,
+	  	success: Boolean
+	  }]
+  }]
 })
 var Habit = mongoose.model("habit", habitSchema)
 
 exports.createNew = function(req, res){
-	console.log(req.body)
 	Habit.create({
 		title: req.body.habit.title,
 	  description: req.body.habit.description,
@@ -23,12 +30,17 @@ exports.createNew = function(req, res){
 	  invited: req.body.habit.teamEmails,
 	  reward: req.body.habit.reward,
 	  owner: req.user.sub,
-	  team: [req.user.sub]
+	  team: [{
+		  name: req.user.name,
+		  email: req.user.email,
+		  id: req.user.sub,
+		  calendar: []
+	  }]
 	}, function(err){
 		if(err) 
 			console.log(err) 
 		else {
-			Habit.find({}, function(err, habits){
+			Habit.find({team: {$elemMatch: {id: req.user.sub}}}, function(err, habits){
 				err ? console.log(err) :
 					res.status(200).json({habits})
 			})
@@ -37,10 +49,18 @@ exports.createNew = function(req, res){
 }
 
 exports.findAll = function(req, res){
-	Habit.find({team: req.user.sub}, function(err, habits){
+	Habit.find({team: {$elemMatch: {id: req.user.sub}}}, function(err, habits){
 		err ? console.log(err) :
 			res.status(200).json({habits})
 	})
 }
+
+exports.remove = function(req, res){
+	Habit.find({$and: [{_id: req.params.id}, {owner: req.user.sub}]}).remove(function(err, habits){
+		err ? console.log(err) :
+			res.status(200).json({habits})
+	})
+}
+
 
 
