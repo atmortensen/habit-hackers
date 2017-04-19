@@ -14,7 +14,18 @@ export default MyHabits
 function MyHabits(props) {
 	if(!props.habits){
 		return <Loading />
-	} else {
+	} else if(props.habits.length===0){
+		return (
+			<div className="myHabits">
+				<div className="habit noHabits">
+					<h1>You are not tracking any of your habits!</h1>
+					<p>To start tracking a habit you can click on the blue button above this box.</p>
+					<p>A good goal should be something trackable. "Be more healthy" isn't a very good goal, because is is not trackable or specific. Instead, you should choose something like "eat a healthy breakfast."</p>
+					<p>Good Luck!</p>
+				</div>
+			</div>
+		)
+	}	else {
 		return (
 			<div 
 				className='myHabits'>

@@ -14,7 +14,7 @@ export class Auth0 extends Component {
         params: {scope: 'openid email name'}
       },
       theme: {
-        logo: 'http://i.imgur.com/MvY84lh.png'
+        logo: 'https://s3-us-west-2.amazonaws.com/habit-hackers/logoSmall.png'
       },
       languageDictionary: {
         title: 'Habit Hackers'

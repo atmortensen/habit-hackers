@@ -9,6 +9,15 @@
 	margin-left: 15px;
 }
 
+.myHabits .noHabits {
+	text-align: center;
+}
+
+.myHabits .noHabits p {
+	margin: 10px 0;
+	font-size: 1.2em;
+}
+
 .myHabits .editButtons {
 	text-align: right;
 }
