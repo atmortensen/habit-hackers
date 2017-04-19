@@ -18,9 +18,9 @@ function MyHabits(props) {
 		return (
 			<div className="myHabits">
 				<div className="habit noHabits">
-					<h1>You are not tracking any of your habits!</h1>
+					<h1>You are not tracking any habits!</h1>
 					<p>To start tracking a habit you can click on the blue button above this box.</p>
-					<p>A good goal should be something trackable. "Be more healthy" isn't a very good goal, because is is not trackable or specific. Instead, you should choose something like "eat a healthy breakfast."</p>
+					<p>A good goal should be something trackable. "Be more healthy" isn't a very good goal, because it isn't trackable or specific. Instead, you should choose something like "eat a healthy breakfast."</p>
 					<p>Good Luck!</p>
 				</div>
 			</div>

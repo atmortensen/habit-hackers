@@ -13,7 +13,7 @@ app.use(cors())
 app.use(express.static(__dirname + '/static'))
 
 app.get('/api/habits', authenticate, databaseCtrl.findAll)
-app.post('/api/habits', authenticate, databaseCtrl.createNew)
+app.post('/api/habits', authenticate, databaseCtrl.create)
 app.delete('/api/habits/:id', authenticate, databaseCtrl.remove)
 
 // app.get('/email', function(req, res){

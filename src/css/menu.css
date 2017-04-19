@@ -28,6 +28,7 @@
 .menu .logo li {
 	border: 3px solid #333;
 	color: #2072ac;
+	/*font-weight: bold;*/
 }
 
 .menu .logo:hover li {

@@ -21,7 +21,7 @@ var habitSchema = new mongoose.Schema({
 })
 var Habit = mongoose.model("habit", habitSchema)
 
-exports.createNew = function(req, res){
+exports.create = function(req, res){
 	Habit.create({
 		title: req.body.habit.title,
 	  description: req.body.habit.description,
@@ -59,6 +59,13 @@ exports.remove = function(req, res){
 	Habit.find({$and: [{_id: req.params.id}, {owner: req.user.sub}]}).remove(function(err, habits){
 		err ? console.log(err) :
 			res.status(200).json({habits})
+	})
+}
+
+exports.update = function(req, res){
+	Habit.findById(req.params.id, function(err, habit){
+		if(err){ console.log(err) }
+		else{	habit.save(err => console.log(err)) }
 	})
 }
 
