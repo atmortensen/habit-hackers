@@ -6,6 +6,7 @@ const cors = require('cors')
 const authenticate = require('./server/jwtAuth.js')
 const databaseCtrl = require('./server/databaseCtrl.js')
 
+app.set('port', (process.env.PORT || 3001))
 app.use(bodyParser.json())
 app.use(cors())
 app.use(express.static(__dirname + '/build'))
@@ -18,6 +19,6 @@ app.get('*', function(req, res) {
   res.sendFile(__dirname + '/build/index.html') 
 })
 
-app.listen(3001, function(){
-  console.log('Listening on http://localhost:3001')
+app.listen(app.get('port'), function(){
+  console.log('Listening on port ' + app.get('port'))
 })
