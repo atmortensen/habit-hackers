@@ -12,7 +12,7 @@ export default class Dashboard extends Component {
 	constructor(){
 		super()
 
-		let timeOfDay = moment('06:00pm', 'hh:mma')
+		let timeOfDay = moment()
 		if(timeOfDay.isBetween(moment('12:00am', 'hh:mma'), moment('12:00pm', 'hh:mma')))
 			timeOfDay = 'morning'
 		else if(timeOfDay.isBetween(moment('12:00pm', 'hh:mma'), moment('06:00pm', 'hh:mma')))
@@ -61,9 +61,6 @@ export default class Dashboard extends Component {
     	return (
 	      <div className="container dashboard">
 	        <RandomQuote />
-	        {!!this.state.flashMessage &&
-						<p className="flashMessage">{this.state.flashMessage}</p>
-	        }
 	        <div className="flex">
 		        <h3>Good {this.state.timeOfDay}, {auth.getProfile().name.split(' ')[0]}!</h3>
 		        <button 
@@ -71,6 +68,9 @@ export default class Dashboard extends Component {
 		        	Start tracking a new habit.
 		        </button>
 	        </div>
+	        {!!this.state.flashMessage &&
+						<p className="flashMessage">{this.state.flashMessage}</p>
+	        }
 	        
 	        <Modal 
 	        	hideFn={this.hideModal.bind(this)} 

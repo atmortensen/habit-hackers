@@ -13,7 +13,7 @@ export default class NewHabitFormWrapper extends Component {
 		let originalState
 		if(this.props.habit){
 			originalState = {
-				head: 'Edit habit...',
+				head: 'Edit habit tracker...',
 				title: this.props.habit.title,
 				description: this.props.habit.description,
 				startDate: moment(this.props.habit.startDate),

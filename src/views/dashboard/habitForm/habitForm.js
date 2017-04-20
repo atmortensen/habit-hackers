@@ -89,7 +89,7 @@ function NewHabitForm(props){
 			<div className="section">
 				<textarea
 					type="text"
-					placeholder="Set a reward for the team member who is most successful in keeping the goal."
+					placeholder="Set an optional reward for the team member who is most successful in keeping the goal."
 					value={props.reward}
 					onChange={props.rewardHandler}>
         </textarea> 
