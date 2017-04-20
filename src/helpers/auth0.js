@@ -9,7 +9,7 @@ export class Auth0 extends Component {
     // Configure Auth0
     this.lock = new Auth0Lock('7cwpdzgLqT9h0Y5qTCh4GZDOVtGqGu61', 'mortensen.auth0.com', {
       auth: {
-        redirectUrl: 'http://localhost:3000/auth0',
+        redirectUrl: location.protocol + '//' + location.host + '/auth0',
         responseType: 'token',
         params: {scope: 'openid email name'}
       },

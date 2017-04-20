@@ -8,14 +8,14 @@ const databaseCtrl = require('./server/databaseCtrl.js')
 
 app.use(bodyParser.json())
 app.use(cors())
-app.use(express.static(__dirname + '/static'))
+app.use(express.static(__dirname + '/build'))
 
 app.get('/api/habits', authenticate, databaseCtrl.findAll)
 app.post('/api/habits', authenticate, databaseCtrl.create)
 app.delete('/api/habits/:id', authenticate, databaseCtrl.remove)
 
 app.get('*', function(req, res) {
-  res.sendFile(__dirname + '/static/index.html') 
+  res.sendFile(__dirname + '/build/index.html') 
 })
 
 app.listen(3001, function(){
