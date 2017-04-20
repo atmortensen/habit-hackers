@@ -2,8 +2,6 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 // const cors = require('cors')
-console.log(process.env.MLABS_USER)
-console.log(process.env.MLABS_PASS)
 const authenticate = require('./server/jwtAuth.js')
 const databaseCtrl = require('./server/databaseCtrl.js')
 
