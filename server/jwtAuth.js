@@ -1,7 +1,6 @@
 const jwt = require('express-jwt')
-// require('dotenv').config()
+require('dotenv').config()
 
-console.log(process.env.AUTH0_CLIENT_SECRET)
 // Authentication middleware.
 const authenticate = jwt({
   secret: process.env.AUTH0_CLIENT_SECRET,
