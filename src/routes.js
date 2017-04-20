@@ -14,11 +14,18 @@ export default class Routes extends Component {
           
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/dashboard" component={Dashboard} />
-              <Route path="/invite/:id" component={Dashboard} />
+              <Route path="/dashboard/:id?" component={Dashboard} />
               <Route path="/auth0" component={Auth0} />
               <Route render={function () {
-                return <p>Not Found</p>
+                return (
+                  <h2 
+                    style={{
+                      padding: '50px', 
+                      textAlign: 'center'
+                    }}>
+                    Page not found!
+                  </h2>
+                )
               }} />
             </Switch>
 

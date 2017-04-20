@@ -9,8 +9,8 @@ import * as endpoints from '../../helpers/endpoints'
 import './dashboard.css'
 
 export default class Dashboard extends Component {
-	constructor(){
-		super()
+	constructor(props){
+		super(props)
 
 		let timeOfDay = moment()
 		if(timeOfDay.isBetween(moment('12:00am', 'hh:mma'), moment('12:00pm', 'hh:mma')))
@@ -24,7 +24,9 @@ export default class Dashboard extends Component {
 			displayModal: false,
 			formStarted: false,
 			habits: null,
-			flashMessage: null
+			flashMessage: null,
+			inviteId: this.props.match.params.id,
+			showInviteModal: true
 		}
 	}
 
@@ -32,7 +34,6 @@ export default class Dashboard extends Component {
 		endpoints.findHabits().then((response)=>{
 			this.setState({habits: response.habits})
 		})
-		
 	}
 
 	showModal(){
@@ -41,6 +42,7 @@ export default class Dashboard extends Component {
 
 	hideModal(){
 		this.setState({displayModal: false})
+		this.setState({showInviteModal: false})
 	}
 
 	clearHabits(){
@@ -70,6 +72,14 @@ export default class Dashboard extends Component {
 	        </div>
 	        {!!this.state.flashMessage &&
 						<p className="flashMessage">{this.state.flashMessage}</p>
+	        }
+
+	        {!!this.state.inviteId &&
+	        	<Modal
+	        		hideFn={this.hideModal.bind(this)} 
+	        		display={this.state.showInviteModal}>
+	        		test
+	        	</Modal>
 	        }
 	        
 	        <Modal 
