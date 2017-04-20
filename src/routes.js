@@ -13,7 +13,7 @@ export default class Routes extends Component {
           <Layout>
           
             <Switch>
-              <Route exact path='/' component={Home} />
+              <Route exact path="/" component={Home} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/auth0" component={Auth0} />
               <Route render={function () {

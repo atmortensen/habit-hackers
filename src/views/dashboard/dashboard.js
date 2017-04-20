@@ -12,13 +12,12 @@ export default class Dashboard extends Component {
 	constructor(){
 		super()
 
-		let timeOfDay = moment()
-		if(timeOfDay.isBetween(moment('02:00am', 'hh:mma'), moment('11:30am', 'hh:mma')))
+		let timeOfDay = moment('06:00pm', 'hh:mma')
+		if(timeOfDay.isBetween(moment('12:00am', 'hh:mma'), moment('12:00pm', 'hh:mma')))
 			timeOfDay = 'morning'
-		else if(timeOfDay.isBetween(moment('11:30am', 'hh:mma'), moment('06:00pm', 'hh:mma')))
+		else if(timeOfDay.isBetween(moment('12:00pm', 'hh:mma'), moment('06:00pm', 'hh:mma')))
 			timeOfDay = 'afternoon'
-		else if(timeOfDay.isBetween(moment('06:00pm', 'hh:mma'), moment('02:00am', 'hh:mma')))
-			timeOfDay = 'evening'
+		else timeOfDay = 'evening'
 
 		this.state = {
 			timeOfDay: timeOfDay,
