@@ -11,6 +11,9 @@ app.use(bodyParser.json())
 app.use(cors())
 app.use(express.static(__dirname + '/build'))
 
+app.get('/api', function(req, res){
+	res.json({message: 'All good'})
+})
 app.get('/api/habits', authenticate, databaseCtrl.findAll)
 app.post('/api/habits', authenticate, databaseCtrl.create)
 app.delete('/api/habits/:id', authenticate, databaseCtrl.remove)
