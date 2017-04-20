@@ -49,5 +49,8 @@
   "bugs": {
     "url": "https://github.com/atmortensen/habit-hackers/issues"
   },
-  "homepage": "/"
+  "homepage": "/",
+  "engines": {
+    "node": "6.10.2"
+  }
 }
