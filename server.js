@@ -14,10 +14,6 @@ app.get('/api/habits', authenticate, databaseCtrl.findAll)
 app.post('/api/habits', authenticate, databaseCtrl.create)
 app.delete('/api/habits/:id', authenticate, databaseCtrl.remove)
 
-app.get('/test', authenticate, function(req, res){
-	res.json({message: 'success'})
-})
-
 app.get('*', function(req, res) {
   res.sendFile(__dirname + '/build/index.html') 
 })
