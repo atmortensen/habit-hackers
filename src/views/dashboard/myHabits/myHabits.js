@@ -4,10 +4,10 @@ import './myHabits.css'
 import Calendar from './calendar'
 import Modal from '../../../components/modal'
 import HabitForm from '../habitForm/habitFormWrapper'
-import auth from '../../../helpers/auth0'
 import * as endpoints from '../../../helpers/endpoints'
 import { default as swal } from 'sweetalert2'
 import 'sweetalert2/dist/sweetalert2.min.css'
+import jwt from 'jwt-decode'
 
 export default MyHabits
 
@@ -60,18 +60,27 @@ class Habit extends Component {
   	this.setState({displayModal: true})
   }
 
-  removeHabit(){
-  	swal({
-  		title: 'Are you sure you want to delete?',
-  	  type: 'error',
-  	  showCancelButton: true,
-  	  confirmButtonText: 'Yes'
-  	}).then(() => {
-  		this.props.clearHabits()
-  		endpoints.removeHabit(this.props.habit._id).then(()=>{
-  			this.props.updateHabits('Successfully deleted.')
-  		})
-  	}).catch(swal.noop)
+  leaveTeam(){
+  	if(jwt(localStorage.getItem('id_token')).sub === this.props.habit.owner.id &&
+  		this.props.habit.team.length>1){
+  		swal({
+	  		title: 'Change team leader!',
+	  		text: 'Change the team lead before leaving, so everyone else won\'t loose their progress.',
+	  	  type: 'warning'
+	  	})
+  	} else {
+  		swal({
+  			title: 'Are you sure you want to leave this team?',
+  		  type: 'error',
+  		  showCancelButton: true,
+  		  confirmButtonText: 'Yes'
+  		}).then(() => {
+  			this.props.clearHabits()
+  			endpoints.leaveHabit(this.props.habit._id).then(()=>{
+  				this.props.updateHabits('Successfully left team.')
+  			})
+  		}).catch(swal.noop)
+  	}
   }
 
 	render(){
@@ -88,19 +97,20 @@ class Habit extends Component {
 					return <li key={i}>{person.name}</li>
 				})}
 				
-				{auth.getProfile().user_id === this.props.habit.owner.id &&
-					<div className="editButtons">
+				<div className="editButtons">
+					{jwt(localStorage.getItem('id_token')).sub === this.props.habit.owner.id &&
 						<button
 							onClick={this.showModal.bind(this)}>
 							Edit
 						</button>
-						<button
-							className="red"
-							onClick={this.removeHabit.bind(this)}>
-							Delete
-						</button>
-					</div>
-				}
+					}
+					<button
+						className="red"
+						onClick={this.leaveTeam.bind(this)}>
+						Leave Team
+					</button>
+				</div>
+
 				<Modal 
 					hideFn={this.hideModal.bind(this)} 
 					display={this.state.displayModal}>

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import moment from 'moment'
+import jwt from 'jwt-decode'
 import auth from '../../helpers/auth0'
 import Modal from '../../components/modal'
 import RandomQuote from '../../components/randomQuote'
@@ -27,7 +28,7 @@ export default class Dashboard extends Component {
 			formStarted: false,
 			habits: null,
 			flashMessage: null,
-			inviteId: this.props.match.params.id || localStorage.getItem('inviteId'),
+			inviteId: this.props.match.params.id || localStorage.getItem('inviteId') || '',
 			showInviteModal: true
 		}
 	}
@@ -64,14 +65,15 @@ export default class Dashboard extends Component {
 
   render() {
     if(!auth.loggedIn()){
-    	auth.login(this.state.inviteId)
+    	localStorage.setItem('inviteId', this.state.inviteId)
+    	auth.login()
     	return <Home />
     } else { 
     	return (
 	      <div className="container dashboard">
 	        <RandomQuote />
 	        <div className="flex">
-		        <h3>Good {this.state.timeOfDay}, {auth.getProfile().name.split(' ')[0]}!</h3>
+		        <h3>Good {this.state.timeOfDay}, {jwt(localStorage.getItem('id_token')).name.split(' ')[0]}!</h3>
 		        <button 
 		        	onClick={this.showModal.bind(this)}>
 		        	Start tracking a new habit.
@@ -87,6 +89,7 @@ export default class Dashboard extends Component {
 	        		display={this.state.showInviteModal}>
 	        		<Invite 
 		        		updateHabits={this.updateHabits.bind(this)}
+		        		clearHabits={this.clearHabits.bind(this)}
 	        			id={this.state.inviteId}
 	        			closeFn={this.closeInvite.bind(this)} />  
 	        	</Modal>

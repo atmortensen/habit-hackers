@@ -14,7 +14,8 @@ export class Auth0 extends Component {
         params: {scope: 'openid email name'}
       },
       theme: {
-        logo: 'https://s3-us-west-2.amazonaws.com/habit-hackers/logoSmall.png'
+        logo: 'https://s3-us-west-2.amazonaws.com/habit-hackers/logoSmall.png',
+        primaryColor: '#000'
       },
       languageDictionary: {
         title: 'Habit Hackers'
@@ -27,23 +28,16 @@ export class Auth0 extends Component {
     this.login = this.login.bind(this)
     this.logout = this.logout.bind(this)
     this.loggedIn = this.loggedIn.bind(this)
-    this.getProfile = this.getProfile.bind(this)
   }
 
   _doAuthentication(authResult) {
     // Saves the user token
     this.setToken(authResult.idToken)
-
-    this.lock.getProfile(authResult.idToken, (error, profile) => {
-      localStorage.setItem('profile', JSON.stringify(profile))
-      if(this.props) this.props.history.push('/dashboard')
-    })
-    
+    if(this.props) this.props.history.push('/dashboard')
   }
 
-  login(inviteId) {
+  login() {
     // Call the show method to display the widget.
-    localStorage.setItem('inviteId', inviteId)
     this.lock.show()
   }
 
@@ -63,17 +57,10 @@ export class Auth0 extends Component {
     return localStorage.getItem('id_token')
   }
 
-  getProfile() {
-    // Retrieves the profile data from local storage
-    const profile = localStorage.getItem('profile')
-    return profile ? JSON.parse(localStorage.profile) : {}
-  }
-
   logout() {
     // Clear user token and profile data from local storage
     window.location.replace('/')
     localStorage.removeItem('id_token')
-    localStorage.removeItem('profile')
   }
 
   render(){

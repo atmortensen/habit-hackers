@@ -47,13 +47,6 @@ exports.findOne = function(req, res){
 	})
 }
 
-exports.remove = function(req, res){
-	Habit.find({$and: [{_id: req.params.id}, {'owner.id': req.user.sub}]}).remove(function(err){
-		err ? console.log(err) : null
-		res.status(200).json({message: 'Done'})
-	})
-}
-
 exports.acceptInvite = function(req, res){
 	Habit.findById(req.params.id, function(err, habit){
 		err ? console.log(err) : null
@@ -65,8 +58,26 @@ exports.acceptInvite = function(req, res){
 			  id: req.user.sub,
 			  calendar: []
 			})
-			habit.save(err => console.log(err))
+			habit.save()
 		} 
+		res.status(200).json({message: 'done'})	
+	})
+}
+
+exports.leaveHabit = function(req, res){
+	Habit.findById(req.params.id, function(err, habit){
+		err ? console.log(err) : null
+		habit.team = habit.team.filter(person => person.id!==req.user.sub)
+		habit.save()
+		res.status(200).json({message: 'done'})	
+	})
+}
+
+exports.changeOwner = function(req, res){
+	Habit.findById(req.params.id, function(err, habit){
+		err ? console.log(err) : null
+		habit.team = habit.team.filter(person => person.id!==req.user.sub)
+		habit.save()
 		res.status(200).json({message: 'done'})	
 	})
 }

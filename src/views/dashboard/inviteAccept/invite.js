@@ -17,15 +17,17 @@ export default class Invite extends Component {
 
 	componentDidMount(){
 		localStorage.removeItem('inviteId')
-		endpoints.viewInvite(this.props.id)
-			.then(data=> {
-				if(data.habit) {
-					this.setState({habit: data.habit}) 
-				}	else {
-					this.props.closeFn()
-					swal('Error.',  'Invite unavailable.')
-				}
-			})
+		if(this.props.id && this.props.id!=='null'){
+			endpoints.viewInvite(this.props.id)
+				.then(data=> {
+					if(data.habit) {
+						this.setState({habit: data.habit}) 
+					}	else {
+						this.props.closeFn()
+						swal('Error.',  'Invite unavailable.')
+					}
+				})
+		}
 	}
 
 	declineHandler(){
@@ -40,9 +42,11 @@ export default class Invite extends Component {
 	}
 
 	acceptHandler(){
-		endpoints.acceptInvite(this.state.habit._id)
-		this.props.updateHabits('Successfully joined a team!')
 		this.props.closeFn()
+		this.props.clearHabits()
+		endpoints.acceptInvite(this.state.habit._id).then(()=>{
+			this.props.updateHabits('Successfully joined a team!')
+		})
 	}
 
 	render(){

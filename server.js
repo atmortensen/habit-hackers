@@ -17,6 +17,7 @@ app.get('/api/habits', authenticate, databaseCtrl.findAll)
 app.get('/api/habits/:id', authenticate, databaseCtrl.findOne)
 app.post('/api/habits', authenticate, databaseCtrl.create)
 app.put('/api/habits/acceptInvite/:id', authenticate, databaseCtrl.acceptInvite)
+app.put('/api/habits/leaveHabit/:id', authenticate, databaseCtrl.leaveHabit)
 app.delete('/api/habits/:id', authenticate, databaseCtrl.remove)
 
 app.get('*', function(req, res) {
