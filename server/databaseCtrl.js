@@ -43,7 +43,7 @@ exports.findOne = function(req, res){
 			res.status(200).json({habit})
 		} else {
 			res.status(200).json({error: 'No invite found.'})
-		}	
+		}
 	})
 }
 
@@ -51,6 +51,23 @@ exports.remove = function(req, res){
 	Habit.find({$and: [{_id: req.params.id}, {'owner.id': req.user.sub}]}).remove(function(err){
 		err ? console.log(err) : null
 		res.status(200).json({message: 'Done'})
+	})
+}
+
+exports.acceptInvite = function(req, res){
+	Habit.findById(req.params.id, function(err, habit){
+		err ? console.log(err) : null
+		let existingTeamMember = habit.team.filter(person => person.email===req.user.email)
+		if(habit && habit.invited.indexOf(req.user.email)!==-1 && existingTeamMember.length===0){
+			habit.team.push({
+				name: req.user.name,
+			  email: req.user.email,
+			  id: req.user.sub,
+			  calendar: []
+			})
+			habit.save(err => console.log(err))
+		} 
+		res.status(200).json({message: 'done'})	
 	})
 }
 

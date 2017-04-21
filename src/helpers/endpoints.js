@@ -29,4 +29,11 @@ export function viewInvite(id){
 	})
 }
 
+export function acceptInvite(id){
+	return axios().put('api/habits/acceptInvite/'+id)
+	.then(function (response) {
+		return response.data
+	})
+}
+
 

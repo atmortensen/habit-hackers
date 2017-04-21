@@ -32,6 +32,12 @@ export default class Invite extends Component {
 		}).catch(swal.noop)
 	}
 
+	acceptHandler(){
+		endpoints.acceptInvite(this.state.habit._id)
+		this.props.updateHabits('Successfully joined a team!')
+		this.props.closeFn()
+	}
+
 	render(){
 		if(!this.state.habit) {
 			return <Loading noContainer={true} />
@@ -57,7 +63,10 @@ export default class Invite extends Component {
 					}
 				</div>
 				<div className="buttons">
-					<button>Accept Invitation</button>
+					<button 
+						onClick={this.acceptHandler.bind(this)}>
+						Accept Invitation
+					</button>
 					<button 
 						onClick={this.declineHandler.bind(this)} 
 						className='red'>

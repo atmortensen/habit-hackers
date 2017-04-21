@@ -83,6 +83,10 @@ class Habit extends Component {
 				<Calendar
 					startDate={this.props.habit.startDate}
 					endDate={this.props.habit.endDate} />
+					
+				{this.props.habit.team.map(person => {
+					return <li>{person.name}</li>
+				})}
 				
 				{auth.getProfile().user_id === this.props.habit.owner.id &&
 					<div className="editButtons">

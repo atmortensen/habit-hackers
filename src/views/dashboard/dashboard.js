@@ -86,6 +86,7 @@ export default class Dashboard extends Component {
 		        	noClose="true"
 	        		display={this.state.showInviteModal}>
 	        		<Invite 
+		        		updateHabits={this.updateHabits.bind(this)}
 	        			id={this.state.inviteId}
 	        			closeFn={this.closeInvite.bind(this)} />  
 	        	</Modal>
