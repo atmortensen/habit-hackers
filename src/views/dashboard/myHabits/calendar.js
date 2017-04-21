@@ -74,7 +74,7 @@ export default class Calendar extends Component {
 					disabledDays={[{ before: start }, { after: end }]}
 					onDayClick={this.calendarClick.bind(this)}
 					fromMonth={start}
-		      toMonth={end} />
+		      toMonth={new Date(moment(end).subtract(1, 'd'))} />
       </div>
 		)
 	}

@@ -20,11 +20,31 @@
 
 .myHabits .editButtons {
 	text-align: right;
+	clear: both;
+}
+
+.dashCal {
+	padding: 10px 0;
+	display: flex;
 }
 
 .DayPicker {
 	width: 266px;
 	height: 304px;
+	margin: auto;
+}
+
+.calendar .overlay {
+	margin: auto;
+	position: absolute;
+	display: flex;
+	width: 266px;
+	align-items: center;
+	height: 304px;
+	background: rgba(255,255,255,0.75);
+	z-index: 10;
+	transition: opacity .1s;
+	transition-delay: .3s;
 }
 
 .DayPicker:focus, .DayPicker .DayPicker-Day:focus {
@@ -35,15 +55,33 @@
 	background: #5fb962;
 }
 
-.calendar .overlay {
-	position: absolute;
-	display: flex;
-	width: 266px;
-	align-items: center;
-	height: 304px;
-	background: rgba(255,255,255,0.75);
-	z-index: 10;
-	transition: opacity .3s;
-	transition-delay: .5s;
+.calendar {
+	margin-top: 15px;
+	width: 50%;
 }
+
+.leaderBoard {
+	height: 300px;
+	width: 50%;
+	text-align: center;
+	background: #F2F2F2;
+}
+
+.leaderBoard h3 {
+}
+
+.leaderBoard ul {
+	width: 100%;
+	margin: auto;
+	list-style: none;
+}
+
+.leadBoard li {
+
+}
+
+.leaderBoard li:nth-child(odd) {
+	background: #F2F2F2;
+}
+
 
