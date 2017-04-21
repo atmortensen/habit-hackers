@@ -18,7 +18,14 @@ export default class Invite extends Component {
 	componentDidMount(){
 		localStorage.removeItem('inviteId')
 		endpoints.viewInvite(this.props.id)
-			.then(data=> this.setState({habit: data.habit}) )
+			.then(data=> {
+				if(data.habit) {
+					this.setState({habit: data.habit}) 
+				}	else {
+					this.props.closeFn()
+					swal('Error.',  'Invite unavailable.')
+				}
+			})
 	}
 
 	declineHandler(){

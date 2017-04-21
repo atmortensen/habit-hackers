@@ -84,8 +84,8 @@ class Habit extends Component {
 					startDate={this.props.habit.startDate}
 					endDate={this.props.habit.endDate} />
 					
-				{this.props.habit.team.map(person => {
-					return <li>{person.name}</li>
+				{this.props.habit.team.map((person, i) => {
+					return <li key={i}>{person.name}</li>
 				})}
 				
 				{auth.getProfile().user_id === this.props.habit.owner.id &&
