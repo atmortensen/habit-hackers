@@ -66,7 +66,7 @@ export default class Calendar extends Component {
 				<div 
 					style={this.state.readyStyle} 
 					className="overlay">
-					{this.state.readyStyle.pointerEvents==='all' && <Loading /> }
+					{this.state.readyStyle.pointerEvents==='all' && <Loading noContainer={true} /> }
 				</div>
 				
 				<DayPicker 

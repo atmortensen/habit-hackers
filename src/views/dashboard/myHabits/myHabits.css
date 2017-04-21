@@ -32,12 +32,14 @@
 	width: 266px;
 	height: 304px;
 	margin: auto;
+	padding: 0;
 }
 
 .calendar .overlay {
 	margin: auto;
 	position: absolute;
-	display: flex;
+	left: 0;
+	right: 0;
 	width: 266px;
 	align-items: center;
 	height: 304px;
@@ -58,30 +60,35 @@
 .calendar {
 	margin-top: 15px;
 	width: 50%;
+	position: relative;
 }
 
 .leaderBoard {
-	height: 300px;
+	margin-top: 25px;
 	width: 50%;
-	text-align: center;
-	background: #F2F2F2;
 }
 
 .leaderBoard h3 {
+	text-align: center;
+	margin: 5px 0;
 }
 
 .leaderBoard ul {
-	width: 100%;
+	width: 80%;
+	max-height: 245px;
 	margin: auto;
 	list-style: none;
+	border: 1px solid #F2F2F2;
 }
 
-.leadBoard li {
+.leaderBoard li {
+	padding: 7px;
+}
 
+.leaderBoard li .percent {
+	float: right;
 }
 
 .leaderBoard li:nth-child(odd) {
 	background: #F2F2F2;
 }
-
-
