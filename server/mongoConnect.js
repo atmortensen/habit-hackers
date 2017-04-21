@@ -14,7 +14,11 @@ const habitSchema = new mongoose.Schema({
   endDate: String,
   invited: [String],
   reward: String,
-  owner: String,
+  owner: {
+    name: String,
+    email: String,
+    id: String
+  },
   team: [{
 	  name: String,
 	  email: String,

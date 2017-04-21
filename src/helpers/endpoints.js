@@ -22,3 +22,11 @@ export function removeHabit(id){
 	})
 }
 
+export function viewInvite(id){
+	return axios().get('api/habits/'+id)
+	.then(function (response) {
+		return response.data
+	})
+}
+
+

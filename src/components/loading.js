@@ -2,12 +2,17 @@ import React, {Component} from 'react'
 import '../css/loading.css'
 
 export default class Loading extends Component {
-	constructor(){
-		super()
+	constructor(props){
+		super(props)
+
+		let container
+		if(!this.props.noContainer) 
+			container = 'container'
 
 		this.state = {
 			loading: 'loading',
-			error: ''
+			error: '',
+			container: container
 		}
 	}
 
@@ -34,7 +39,7 @@ export default class Loading extends Component {
 	
 	render(){
 		return (
-			<div className="loading-wrapper container">
+			<div className={"loading-wrapper " + this.state.container}>
 				<h2>{this.state.loading}</h2>
 				<h3>{this.state.error}</h3>
 			</div>

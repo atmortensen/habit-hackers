@@ -54,11 +54,13 @@ export default class Modal extends Component {
 					style={{
 						marginTop: this.state.marginTop, 
 					}}>
-					<div 
-						className="close"
-						onClick={this.props.hideFn}>
-						x
-					</div>
+					{!this.props.noClose &&
+						<div 
+							className="close"
+							onClick={this.props.hideFn}>
+							x
+						</div>
+					}
 					<div className="content">
 						{this.props.children}
 					</div>

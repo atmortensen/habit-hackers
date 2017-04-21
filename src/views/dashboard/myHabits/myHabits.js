@@ -64,7 +64,8 @@ class Habit extends Component {
   	swal({
   		title: 'Are you sure you want to delete?',
   	  type: 'error',
-  	  showCancelButton: true
+  	  showCancelButton: true,
+  	  confirmButtonText: 'Yes'
   	}).then(() => {
   		this.props.clearHabits()
   		endpoints.removeHabit(this.props.habit._id).then(()=>{
@@ -83,7 +84,7 @@ class Habit extends Component {
 					startDate={this.props.habit.startDate}
 					endDate={this.props.habit.endDate} />
 				
-				{auth.getProfile().user_id === this.props.habit.owner &&
+				{auth.getProfile().user_id === this.props.habit.owner.id &&
 					<div className="editButtons">
 						<button
 							onClick={this.showModal.bind(this)}>

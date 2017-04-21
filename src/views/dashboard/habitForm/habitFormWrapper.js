@@ -54,7 +54,8 @@ export default class NewHabitFormWrapper extends Component {
 					title: 'Are you sure?',
 				  text: 'You will lose all changes!',
 				  type: 'warning',
-				  showCancelButton: true
+				  showCancelButton: true,
+				  confirmButtonText: 'Yes'
 				}).then(function () {
 					reset()
 				}).catch(swal.noop)

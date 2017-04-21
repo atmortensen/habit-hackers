@@ -41,8 +41,9 @@ export class Auth0 extends Component {
     
   }
 
-  login() {
+  login(inviteId) {
     // Call the show method to display the widget.
+    localStorage.setItem('inviteId', inviteId)
     this.lock.show()
   }
 

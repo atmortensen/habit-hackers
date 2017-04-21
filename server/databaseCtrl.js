@@ -11,7 +11,11 @@ exports.create = function(req, res){
 	  endDate: req.body.habit.endDate,
 	  invited: req.body.habit.teamEmails,
 	  reward: req.body.habit.reward,
-	  owner: req.user.sub,
+	  owner: {
+	  	name: req.user.name,
+		  email: req.user.email,
+		  id: req.user.sub
+	  },
 	  team: [{
 		  name: req.user.name,
 		  email: req.user.email,
@@ -26,7 +30,7 @@ exports.create = function(req, res){
 }
 
 exports.findAll = function(req, res){
-	Habit.find({team: {$elemMatch: {id: req.user.sub}}}, function(err, habits){
+	Habit.find({'team.id': req.user.sub}, function(err, habits){
 		err ? console.log(err) : null
 		res.status(200).json({habits})
 	})
@@ -35,7 +39,7 @@ exports.findAll = function(req, res){
 exports.findOne = function(req, res){
 	Habit.findById(req.params.id, function(err, habit){
 		err ? console.log(err) : null
-		if(habit.invited.indexOf(req.user.email)!==-1){
+		if(habit && habit.invited.indexOf(req.user.email)!==-1){
 			res.status(200).json({habit})
 		} else {
 			res.status(200).json({error: 'No invite found.'})
@@ -44,7 +48,7 @@ exports.findOne = function(req, res){
 }
 
 exports.remove = function(req, res){
-	Habit.find({$and: [{_id: req.params.id}, {owner: req.user.sub}]}).remove(function(err){
+	Habit.find({$and: [{_id: req.params.id}, {'owner.id': req.user.sub}]}).remove(function(err){
 		err ? console.log(err) : null
 		res.status(200).json({message: 'Done'})
 	})

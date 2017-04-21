@@ -5,6 +5,8 @@ import Modal from '../../components/modal'
 import RandomQuote from '../../components/randomQuote'
 import HabitForm from './habitForm/habitFormWrapper'
 import MyHabits from './myHabits/myHabits'
+import Invite from './inviteAccept/invite'
+import Home from '../home/home'
 import * as endpoints from '../../helpers/endpoints'
 import './dashboard.css'
 
@@ -25,7 +27,7 @@ export default class Dashboard extends Component {
 			formStarted: false,
 			habits: null,
 			flashMessage: null,
-			inviteId: this.props.match.params.id,
+			inviteId: this.props.match.params.id || localStorage.getItem('inviteId'),
 			showInviteModal: true
 		}
 	}
@@ -42,7 +44,11 @@ export default class Dashboard extends Component {
 
 	hideModal(){
 		this.setState({displayModal: false})
+	}
+
+	closeInvite(){
 		this.setState({showInviteModal: false})
+		this.props.history.push('/dashboard')
 	}
 
 	clearHabits(){
@@ -58,7 +64,8 @@ export default class Dashboard extends Component {
 
   render() {
     if(!auth.loggedIn()){
-    	auth.login()
+    	auth.login(this.state.inviteId)
+    	return <Home />
     } else { 
     	return (
 	      <div className="container dashboard">
@@ -76,9 +83,11 @@ export default class Dashboard extends Component {
 
 	        {!!this.state.inviteId &&
 	        	<Modal
-	        		hideFn={this.hideModal.bind(this)} 
+		        	noClose="true"
 	        		display={this.state.showInviteModal}>
-	        		test
+	        		<Invite 
+	        			id={this.state.inviteId}
+	        			closeFn={this.closeInvite.bind(this)} />  
 	        	</Modal>
 	        }
 	        
