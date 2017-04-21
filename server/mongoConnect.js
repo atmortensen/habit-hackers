@@ -23,10 +23,7 @@ const habitSchema = new mongoose.Schema({
 	  name: String,
 	  email: String,
 	  id: String,
-	  calendar: [{
-	  	day: String,
-	  	success: Boolean
-	  }]
+	  calendar: [String]
   }]
 })
 const Habit = mongoose.model("habit", habitSchema)

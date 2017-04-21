@@ -24,8 +24,25 @@
 
 .DayPicker {
 	width: 266px;
+	height: 304px;
 }
 
 .DayPicker:focus, .DayPicker .DayPicker-Day:focus {
 	outline: none;
 }
+
+.DayPicker-Day--success {
+	background: #5fb962;
+}
+
+.calendar .overlay {
+	position: absolute;
+	display: flex;
+	width: 266px;
+	align-items: center;
+	height: 304px;
+	background: rgba(255,255,255,0.75);
+	z-index: 10;
+	transition: opacity .5s;
+}
+

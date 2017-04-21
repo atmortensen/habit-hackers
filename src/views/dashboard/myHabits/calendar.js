@@ -1,5 +1,10 @@
 import React, {Component} from 'react'
 import DayPicker from 'react-day-picker'
+import moment from 'moment'
+import Loading from '../../../components/loading'
+import * as endpoints from '../../../helpers/endpoints'
+import { default as swal } from 'sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
 import 'react-day-picker/lib/style.css'
 
 export default class Calendar extends Component {
@@ -7,35 +12,67 @@ export default class Calendar extends Component {
 		super()
 
 		this.state = {
-			selectedDay: new Date(),
+			readyStyle: {
+				opacity: 0,
+				pointerEvents: 'none'
+			}
 		}
 	}
 
 	calendarClick(day, { disabled }){
     if (!disabled) {
-      this.setState({selectedDay: day})
+    	if(moment(day).isBefore(moment())){
+    		this.setState({readyStyle: {
+    			opacity: 1,
+    			pointerEvents: 'all'
+    		}})
+    		if(this.props.successDays.indexOf(day.toString())===-1){
+    			endpoints.addSuccess(this.props.id, day.toString()).then(()=>{
+    				this.props.updateHabits()
+    				this.setState({readyStyle: {
+		    			opacity: 0,
+		    			pointerEvents: 'none'
+		    		}})
+    			})
+    		} else {
+    			endpoints.removeSuccess(this.props.id, day.toString()).then(()=>{
+    				this.props.updateHabits()
+    				this.setState({readyStyle: {
+		    			opacity: 0,
+		    			pointerEvents: 'none'
+		    		}})
+    			})
+    		}
+    	} else {
+    		swal({
+		  		title: 'You can\'t mark days that haven\'t passed!',
+		  	  type: 'warning'
+		  	})
+    	}
     }
-  }
-
-  goToToday(){
-  	this.daypicker.showMonth(new Date())
   }
 
 	render(){
 		const start = new Date(this.props.startDate)
 		const end = new Date(this.props.endDate)
+		const modifiers = {
+      success: day => this.props.successDays.indexOf(day.toString())!==-1
+    }
 
 		return (
-			<div>
+			<div className="calendar">
+				<div 
+					style={this.state.readyStyle} 
+					className="overlay">
+					{this.state.readyStyle.pointerEvents==='none' && <Loading /> }
+				</div>
+				
 				<DayPicker 
-					ref={el => this.daypicker = el}
-					className="calendar"
+					modifiers={modifiers}
 					disabledDays={[{ before: start }, { after: end }]}
 					onDayClick={this.calendarClick.bind(this)}
 					fromMonth={start}
-					selectedDays={ this.state.selectedDay }
 		      toMonth={end} />
-	      <a onClick={this.goToToday.bind(this)}>today</a>
       </div>
 		)
 	}

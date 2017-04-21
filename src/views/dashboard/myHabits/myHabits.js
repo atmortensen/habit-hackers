@@ -48,7 +48,8 @@ class Habit extends Component {
 		super()
 
 		this.state = {
-			displayModal: false
+			displayModal: false,
+			userId: jwt(localStorage.getItem('id_token')).sub
 		}
 	}
 
@@ -61,7 +62,7 @@ class Habit extends Component {
   }
 
   leaveTeam(){
-  	if(jwt(localStorage.getItem('id_token')).sub === this.props.habit.owner.id &&
+  	if(this.state.userId === this.props.habit.owner.id &&
   		this.props.habit.team.length>1){
   		swal({
 	  		title: 'Change team leader!',
@@ -90,15 +91,18 @@ class Habit extends Component {
 				<p>{this.props.habit.description}</p>
 				<p>{this.props.habit.reward}</p>
 				<Calendar
+					updateHabits={this.props.updateHabits}
 					startDate={this.props.habit.startDate}
-					endDate={this.props.habit.endDate} />
+					endDate={this.props.habit.endDate}
+					successDays={this.props.habit.team.find(person => this.state.userId === person.id).calendar}
+					id={this.props.habit._id} />
 					
 				{this.props.habit.team.map((person, i) => {
 					return <li key={i}>{person.name}</li>
 				})}
 				
 				<div className="editButtons">
-					{jwt(localStorage.getItem('id_token')).sub === this.props.habit.owner.id &&
+					{this.state.userId === this.props.habit.owner.id &&
 						<button
 							onClick={this.showModal.bind(this)}>
 							Edit

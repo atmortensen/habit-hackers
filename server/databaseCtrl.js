@@ -73,14 +73,23 @@ exports.leaveHabit = function(req, res){
 	})
 }
 
-exports.changeOwner = function(req, res){
+exports.addSuccess = function(req,res){
 	Habit.findById(req.params.id, function(err, habit){
 		err ? console.log(err) : null
-		habit.team = habit.team.filter(person => person.id!==req.user.sub)
+		habit.team.find(person => person.id===req.user.sub).calendar.push(req.body.date)
 		habit.save()
 		res.status(200).json({message: 'done'})	
 	})
 }
+
+// exports.changeOwner = function(req, res){
+// 	Habit.findById(req.params.id, function(err, habit){
+// 		err ? console.log(err) : null
+// 		habit.team = habit.team.filter(person => person.id!==req.user.sub)
+// 		habit.save()
+// 		res.status(200).json({message: 'done'})	
+// 	})
+// }
 
 // exports.update = function(req, res){
 // 	Habit.findById(req.params.id, function(err, habit){

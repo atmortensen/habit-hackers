@@ -16,21 +16,28 @@ export function findHabits(){
 }
 
 export function viewInvite(id){
-	return axios().get('api/habits/'+id)
+	return axios().get('api/habits/' + id)
 	.then(function (response) {
 		return response.data
 	})
 }
 
 export function acceptInvite(id){
-	return axios().put('api/habits/acceptInvite/'+id)
+	return axios().put('api/habits/acceptInvite/' + id)
 	.then(function (response) {
 		return response.data
 	})
 }
 
 export function leaveHabit(id){
-	return axios().put('api/habits/leaveHabit/'+id)
+	return axios().put('api/habits/leaveHabit/' + id)
+	.then(function (response) {
+		return response.data
+	})
+}
+
+export function addSuccess(id, date){
+	return axios().put('api/habits/addSuccess/' + id, {date})
 	.then(function (response) {
 		return response.data
 	})
