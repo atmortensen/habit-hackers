@@ -40,7 +40,16 @@ export default class Invite extends Component {
 
 	render(){
 		if(!this.state.habit) {
-			return <Loading noContainer={true} />
+			return (
+				<div>
+					<Loading noContainer={true} />
+					<button 
+						onClick={this.props.closeFn()} 
+						className='red'>
+						Close
+					</button>
+				</div>
+			)
 		}
 		return (
 			<div className="inviteAccept">
