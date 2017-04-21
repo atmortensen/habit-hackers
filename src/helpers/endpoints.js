@@ -44,7 +44,7 @@ export function addSuccess(id, date){
 }
 
 export function removeSuccess(id, date){
-	return axios().delete('api/habits/removeSuccess/' + id, {date})
+	return axios().put('api/habits/removeSuccess/' + id, {date})
 	.then(function (response) {
 		return response.data
 	})

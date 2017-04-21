@@ -28,19 +28,21 @@ export default class Calendar extends Component {
     		}})
     		if(this.props.successDays.indexOf(day.toString())===-1){
     			endpoints.addSuccess(this.props.id, day.toString()).then(()=>{
-    				this.props.updateHabits()
-    				this.setState({readyStyle: {
-		    			opacity: 0,
-		    			pointerEvents: 'none'
-		    		}})
+    				this.props.updateHabits().then(()=>{
+	    				this.setState({readyStyle: {
+			    			opacity: 0,
+			    			pointerEvents: 'none'
+			    		}})
+    				})
     			})
     		} else {
     			endpoints.removeSuccess(this.props.id, day.toString()).then(()=>{
-    				this.props.updateHabits()
-    				this.setState({readyStyle: {
-		    			opacity: 0,
-		    			pointerEvents: 'none'
-		    		}})
+    				this.props.updateHabits().then(()=>{
+	    				this.setState({readyStyle: {
+			    			opacity: 0,
+			    			pointerEvents: 'none'
+			    		}})
+	    			})
     			})
     		}
     	} else {

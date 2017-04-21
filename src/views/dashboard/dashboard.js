@@ -57,7 +57,7 @@ export default class Dashboard extends Component {
 	}
 
 	updateHabits(message){
-		endpoints.findHabits().then((response)=>{
+		return endpoints.findHabits().then((response)=>{
 			this.setState({habits: response.habits})
 			this.setState({flashMessage: message})
 		})
