@@ -19,6 +19,7 @@ app.post('/api/habits', authenticate, databaseCtrl.create)
 app.put('/api/habits/acceptInvite/:id', authenticate, databaseCtrl.acceptInvite)
 app.put('/api/habits/leaveHabit/:id', authenticate, databaseCtrl.leaveHabit)
 app.put('/api/habits/addSuccess/:id', authenticate, databaseCtrl.addSuccess)
+app.delete('/api/habits/removeSuccess/:id', authenticate, databaseCtrl.removeSuccess)
 
 app.get('*', function(req, res) {
   res.sendFile(__dirname + '/build/index.html') 

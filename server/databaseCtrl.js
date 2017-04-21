@@ -82,6 +82,16 @@ exports.addSuccess = function(req,res){
 	})
 }
 
+exports.removeSuccess = function(req,res){
+	Habit.findById(req.params.id, function(err, habit){
+		err ? console.log(err) : null
+		let foundCalendar = habit.team.find(person => person.id===req.user.sub).calendar
+		foundCalendar.splice(foundCalendar.indexOf(req.body.date), 1)
+		habit.save()
+		res.status(200).json({message: 'done'})	
+	})
+}
+
 // exports.changeOwner = function(req, res){
 // 	Habit.findById(req.params.id, function(err, habit){
 // 		err ? console.log(err) : null
