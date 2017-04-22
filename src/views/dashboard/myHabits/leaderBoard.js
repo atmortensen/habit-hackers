@@ -15,18 +15,18 @@ export default class LeaderBoard extends Component {
 			<div className="leaderBoard">
 				<h3>Leader Board</h3>
 				<ul>
-					{this.props.habit.team.map((person, i) => {
-							let percent = Math.floor(person.calendar.length/this.state.totalDays*100)
-							return (
-								<li 
-									value={percent}
-									key={person.id}>
-									{i+1}. {person.name} 
-									<span className="percent">{percent}%</span>
-								</li>
-							)
-					}).sort((a, b)=>{
-						return b.props.value - a.props.value
+					{this.props.habit.team.sort((a, b)=>{
+						return Math.floor(b.calendar.length/this.state.totalDays*100) - Math.floor(a.calendar.length/this.state.totalDays*100)
+					}).map((person, i) => {
+						let percent = Math.floor(person.calendar.length/this.state.totalDays*100)
+						return (
+							<li 
+								value={percent}
+								key={person.id}>
+								{i+1}. {person.name} 
+								<span className="percent">{percent}%</span>
+							</li>
+						)
 					})}
 				</ul>
 			</div>

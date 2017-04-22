@@ -30,7 +30,7 @@ exports.create = function(req, res){
 }
 
 exports.findAll = function(req, res){
-	Habit.find({'team.id': req.user.sub}, function(err, habits){
+	Habit.find({$query: {'team.id': req.user.sub}, $orderby: {_id: 1}}, function(err, habits){
 		err ? console.log(err) : null
 		res.status(200).json({habits})
 	})

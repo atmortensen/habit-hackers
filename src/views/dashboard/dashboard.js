@@ -10,6 +10,7 @@ import Invite from './inviteAccept/invite'
 import Home from '../home/home'
 import * as endpoints from '../../helpers/endpoints'
 import './dashboard.css'
+import $ from 'jquery'
 
 export default class Dashboard extends Component {
 	constructor(props){
@@ -36,6 +37,19 @@ export default class Dashboard extends Component {
 	componentDidMount(){
 		endpoints.findHabits().then((response)=>{
 			this.setState({habits: response.habits})
+			this.addDropdowns()
+		})
+	}
+
+	addDropdowns(){
+		$('.dropit').on('click', function(){
+			$('.dropdown').slideUp()
+			let dropdown = $(this).parent().find('.dropdown')
+			if(dropdown.css('display')==='none'){
+				dropdown.slideDown(400)
+			} else {
+				dropdown.slideUp(400)
+			}
 		})
 	}
 
@@ -60,6 +74,7 @@ export default class Dashboard extends Component {
 		return endpoints.findHabits().then((response)=>{
 			this.setState({habits: response.habits})
 			this.setState({flashMessage: message})
+			this.addDropdowns()
 		})
 	}
 

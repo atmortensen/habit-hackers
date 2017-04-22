@@ -23,6 +23,21 @@
 	clear: both;
 }
 
+.habit h2 {
+	margin-bottom: 10px;
+	font-size: 45px;
+	line-height: 100%;
+}
+
+.habit .info {
+	margin-bottom: 5px;
+	font-size: 17px;
+}
+
+.habit .dropdown {
+	display: none;
+}
+
 .dashCal {
 	padding: 10px 0;
 	display: flex;
@@ -75,10 +90,12 @@
 
 .leaderBoard ul {
 	width: 80%;
-	max-height: 245px;
+	height: 245px;
+	overflow-y: auto;
 	margin: auto;
 	list-style: none;
 	border: 1px solid #F2F2F2;
+	background: #F2F2F2;
 }
 
 .leaderBoard li {
@@ -90,5 +107,5 @@
 }
 
 .leaderBoard li:nth-child(odd) {
-	background: #F2F2F2;
+	background: #FFF;
 }

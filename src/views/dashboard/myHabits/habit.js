@@ -53,31 +53,39 @@ export default class Habit extends Component {
 		return (
 			<div className="habit">
 				<h2>{this.props.habit.title}</h2>
-				<p>{this.props.habit.description}</p>
-				<p>{this.props.habit.reward}</p>
-				<div className="dashCal">
-					<Calendar
-						updateHabits={this.props.updateHabits}
-						startDate={this.props.habit.startDate}
-						endDate={this.props.habit.endDate}
-						successDays={this.props.habit.team.find(person => this.state.userId === person.id).calendar}
-						id={this.props.habit._id} />
-						
-					<LeaderBoard habit={this.props.habit} />
-				</div>
-				
-				<div className="editButtons">
-					{this.state.userId === this.props.habit.owner.id &&
+				<p className="info"><strong>Team Leader:</strong> {this.props.habit.owner.name}</p>
+				{this.props.habit.description &&
+					<p className="info"><strong>Description:</strong> {this.props.habit.description}</p>
+				}
+				{this.props.habit.reward &&
+					<p className="info"><strong>Reward:</strong> {this.props.habit.reward}</p>
+				}
+				<button className="dropit">Drop</button>
+				<div className="dropdown">
+					<div className="dashCal">
+						<Calendar
+							updateHabits={this.props.updateHabits}
+							startDate={this.props.habit.startDate}
+							endDate={this.props.habit.endDate}
+							successDays={this.props.habit.team.find(person => this.state.userId === person.id).calendar}
+							id={this.props.habit._id} />
+							
+						<LeaderBoard habit={this.props.habit} />
+					</div>
+					
+					<div className="editButtons">
+						{this.state.userId === this.props.habit.owner.id &&
+							<button
+								onClick={this.showModal.bind(this)}>
+								Edit
+							</button>
+						}
 						<button
-							onClick={this.showModal.bind(this)}>
-							Edit
+							className="red"
+							onClick={this.leaveTeam.bind(this)}>
+							Leave Team
 						</button>
-					}
-					<button
-						className="red"
-						onClick={this.leaveTeam.bind(this)}>
-						Leave Team
-					</button>
+					</div>
 				</div>
 
 				<Modal 
