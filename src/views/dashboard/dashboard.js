@@ -74,6 +74,7 @@ export default class Dashboard extends Component {
 		return endpoints.findHabits().then((response)=>{
 			this.setState({habits: response.habits})
 			this.setState({flashMessage: message})
+			$('.dropit').off('click')
 			this.addDropdowns()
 		})
 	}
