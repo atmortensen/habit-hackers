@@ -4,6 +4,10 @@ import RandomQuote from '../../components/randomQuote'
 import './home.css'
 
 export default class Home extends Component {
+	componentDidMount(){
+		localStorage.removeItem('inviteId')
+	}
+
   render() {
     return (
       <div>

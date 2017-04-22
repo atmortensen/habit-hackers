@@ -16,7 +16,6 @@ export default class Invite extends Component {
 	}
 
 	componentDidMount(){
-		localStorage.removeItem('inviteId')
 		if(this.props.id && this.props.id!=='null'){
 			endpoints.viewInvite(this.props.id)
 				.then(data=> {

@@ -7,7 +7,6 @@ import RandomQuote from '../../components/randomQuote'
 import HabitForm from './habitForm/habitFormWrapper'
 import MyHabits from './myHabits/myHabits'
 import Invite from './inviteAccept/invite'
-import Home from '../home/home'
 import * as endpoints from '../../helpers/endpoints'
 import './dashboard.css'
 import $ from 'jquery'
@@ -83,7 +82,7 @@ export default class Dashboard extends Component {
     if(!auth.loggedIn()){
     	localStorage.setItem('inviteId', this.state.inviteId)
     	auth.login()
-    	return <Home />
+    	return null
     } else { 
     	return (
 	      <div className="container dashboard">
