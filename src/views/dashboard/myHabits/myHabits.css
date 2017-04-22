@@ -30,11 +30,11 @@
 	background: #2580c1;
 	padding: 15px 20px;
 	color: #fff;
+	cursor: pointer;
 }
 
 .habit .dropit {
 	float: right;
-	cursor: pointer;
 }
 
 .habit .info {

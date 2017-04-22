@@ -66,7 +66,7 @@ export default class Habit extends Component {
 							<p><strong>Description:</strong> {this.props.habit.description}</p>
 						}
 						{this.props.habit.reward &&
-							<p><strong>Reward:</strong> {this.props.habit.reward}</p>
+							<p><strong>Reward/Incentive:</strong> {this.props.habit.reward}</p>
 						}
 					</div>
 			

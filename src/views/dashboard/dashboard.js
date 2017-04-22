@@ -41,8 +41,8 @@ export default class Dashboard extends Component {
 	}
 
 	addDropdowns(){
-		$('.dropit').on('click', function(){
-			let dropdown = $(this).parent().parent().find('.dropdown')
+		$('.dropit').parent().on('click', function(){
+			let dropdown = $(this).parent().find('.dropdown')
 			if(dropdown.css('display')==='none'){
 				$('.dropdown').slideUp(400)
 				dropdown.slideDown(400)
@@ -71,7 +71,7 @@ export default class Dashboard extends Component {
 		return endpoints.findHabits().then((response)=>{
 			this.setState({habits: response.habits})
 			this.setState({flashMessage: message})
-			$('.dropit').off('click')
+			$('.dropit').parent().off('click')
 			this.addDropdowns()
 		})
 	}

@@ -9,6 +9,13 @@ export default class Layout extends Component {
         <Menu />
         <div className="spacer"></div>
         {this.props.children}
+        <div className="footer">
+        	Created by <a 
+        		target="_blank"
+        		href="http://www.linkedin.com/in/alexander-mortensen">
+        		Alexander Mortensen
+        	</a>
+        </div>
       </div>
     )
   }
