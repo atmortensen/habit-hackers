@@ -42,12 +42,10 @@ export default class Dashboard extends Component {
 
 	addDropdowns(){
 		$('.dropit').on('click', function(){
-			$('.dropdown').slideUp()
-			let dropdown = $(this).parent().find('.dropdown')
+			let dropdown = $(this).parent().parent().find('.dropdown')
 			if(dropdown.css('display')==='none'){
+				$('.dropdown').slideUp(400)
 				dropdown.slideDown(400)
-			} else {
-				dropdown.slideUp(400)
 			}
 		})
 	}
@@ -90,6 +88,7 @@ export default class Dashboard extends Component {
 	        <div className="flex">
 		        <h3>Good {this.state.timeOfDay}, {jwt(localStorage.getItem('id_token')).name.split(' ')[0]}!</h3>
 		        <button 
+			        className="green"
 		        	onClick={this.showModal.bind(this)}>
 		        	Start tracking a new habit.
 		        </button>

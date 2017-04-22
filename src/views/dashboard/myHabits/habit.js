@@ -52,16 +52,24 @@ export default class Habit extends Component {
 	render(){
 		return (
 			<div className="habit">
-				<h2>{this.props.habit.title}</h2>
-				<p className="info"><strong>Team Leader:</strong> {this.props.habit.owner.name}</p>
-				{this.props.habit.description &&
-					<p className="info"><strong>Description:</strong> {this.props.habit.description}</p>
-				}
-				{this.props.habit.reward &&
-					<p className="info"><strong>Reward:</strong> {this.props.habit.reward}</p>
-				}
-				<button className="dropit">Drop</button>
+				<h2>
+					{this.props.habit.title} 
+					<span  
+						className="dropit">
+						<i className="fa fa-angle-down"></i>
+					</span>
+				</h2>
 				<div className="dropdown">
+					<div className="info">
+						<p><strong>Team Leader:</strong> {this.props.habit.owner.name}</p>
+						{this.props.habit.description &&
+							<p><strong>Description:</strong> {this.props.habit.description}</p>
+						}
+						{this.props.habit.reward &&
+							<p><strong>Reward:</strong> {this.props.habit.reward}</p>
+						}
+					</div>
+			
 					<div className="dashCal">
 						<Calendar
 							updateHabits={this.props.updateHabits}
