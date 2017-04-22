@@ -45,6 +45,27 @@ function NewHabitForm(props){
         </textarea> 
 			</div>
 
+			{props.owner && 
+				<div>
+					<p>Change Team Leader:</p>
+					<div className="section">
+						<select 
+							onChange={props.ownerChangeHandler}
+							value={props.owner.id}>
+							{props.team.map(person=>{
+								return (
+									<option 
+										value={person.id}
+										key={person.id}>
+										{person.name}
+									</option>
+								)
+							})}
+						</select>
+					</div>
+				</div>
+			}
+
 			<p>Dates:</p>
 			<div className="section">
 				<DatePicker

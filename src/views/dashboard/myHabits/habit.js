@@ -52,7 +52,7 @@ export default class Habit extends Component {
 	render(){
 		return (
 			<div className="habit">
-				<h2>
+				<h2 className="cardHead">
 					{this.props.habit.title} 
 					<span  
 						className="dropit">
@@ -101,7 +101,9 @@ export default class Habit extends Component {
 					display={this.state.displayModal}>
 					<HabitForm 
 						hide={this.hideModal.bind(this)}
-						habit={this.props.habit} />
+						habit={this.props.habit}
+						updateHabits={this.props.updateHabits}
+						clearHabits={this.props.clearHabits} />
 				</Modal>
 			</div>
 		)

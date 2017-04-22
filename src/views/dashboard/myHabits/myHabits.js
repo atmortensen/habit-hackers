@@ -13,7 +13,7 @@ function MyHabits(props) {
 			<div className="myHabits">
 				<div className="habit noHabits">
 					<h1>You are not tracking any habits!</h1>
-					<p>To start tracking a habit you can click on the blue button above this box.</p>
+					<p>To start tracking a habit you can click on the green button above this box.</p>
 					<p>Pro tip: "Be more healthy" wouldn't be a very good goal, because it isn't very trackable or specific. Instead, you should choose something like "eat a healthy breakfast."</p>
 					<p>Good Luck!</p>
 				</div>

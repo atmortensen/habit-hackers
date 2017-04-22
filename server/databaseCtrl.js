@@ -25,8 +25,8 @@ exports.create = function(req, res){
 	}, function(err, habit){
 		err ? console.log(err) : null
 		sendInvite(req.user, req.body.habit.teamEmails, habit._id)
-		res.status(200).json({message: 'Done'})
 	})
+	res.status(200).json({message: 'Done'})
 }
 
 exports.findAll = function(req, res){
@@ -92,19 +92,22 @@ exports.removeSuccess = function(req,res){
 	})
 }
 
-// exports.changeOwner = function(req, res){
-// 	Habit.findById(req.params.id, function(err, habit){
-// 		err ? console.log(err) : null
-// 		habit.team = habit.team.filter(person => person.id!==req.user.sub)
-// 		habit.save()
-// 		res.status(200).json({message: 'done'})	
-// 	})
-// }
-
-// exports.update = function(req, res){
-// 	Habit.findById(req.params.id, function(err, habit){
-// 		if(err){ console.log(err) }
-// 		else{	habit.save(err => console.log(err)) }
-// 	})
-// }
+exports.update = function(req, res){
+	Habit.findById(req.params.id, function(err, habit){
+		err ? console.log(err) : null
+		if(habit.owner.id===req.user.sub){
+			habit.title = req.body.habit.title
+			habit.description = req.body.habit.description
+			habit.startDate = req.body.habit.startDate
+			habit.endDate = req.body.habit.endDate
+			habit.reward = req.body.habit.reward
+			habit.invited = req.body.habit.teamEmails
+			habit.owner = req.body.habit.owner
+			habit.team = req.body.habit.team
+			habit.save()
+			sendInvite(req.user, req.body.habit.teamEmails, habit._id)
+		}
+		res.status(200).json({message: 'done'})	
+	})
+}
 

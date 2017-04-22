@@ -15,15 +15,8 @@ export default class Dashboard extends Component {
 	constructor(props){
 		super(props)
 
-		let timeOfDay = moment()
-		if(timeOfDay.isBetween(moment('12:00am', 'hh:mma'), moment('12:00pm', 'hh:mma')))
-			timeOfDay = 'morning'
-		else if(timeOfDay.isBetween(moment('12:00pm', 'hh:mma'), moment('06:00pm', 'hh:mma')))
-			timeOfDay = 'afternoon'
-		else timeOfDay = 'evening'
-
 		this.state = {
-			timeOfDay: timeOfDay,
+			timeOfDay: '',
 			displayModal: false,
 			formStarted: false,
 			habits: null,
@@ -34,6 +27,13 @@ export default class Dashboard extends Component {
 	}
 
 	componentDidMount(){
+		let now = moment()
+		if(now.isBetween(moment('12:00am', 'hh:mma'), moment('12:00pm', 'hh:mma')))
+			this.setState({timeOfDay: 'morning'})
+		else if(now.isBetween(moment('12:00pm', 'hh:mma'), moment('06:00pm', 'hh:mma')))
+			this.setState({timeOfDay: 'afternoon'})
+		else this.setState({timeOfDay: 'evening'})
+
 		endpoints.findHabits().then((response)=>{
 			this.setState({habits: response.habits})
 			this.addDropdowns()
@@ -87,11 +87,17 @@ export default class Dashboard extends Component {
 	        <RandomQuote />
 	        <div className="flex">
 		        <h3>Good {this.state.timeOfDay}, {jwt(localStorage.getItem('id_token')).name.split(' ')[0]}!</h3>
-		        <button 
-			        className="green"
-		        	onClick={this.showModal.bind(this)}>
-		        	Start tracking a new habit.
-		        </button>
+		        <div className="topButtons">
+			        <button 
+			        	onClick={this.showModal.bind(this)}>
+			        	How to use.
+			        </button>
+			        <button 
+				        className="green"
+			        	onClick={this.showModal.bind(this)}>
+			        	Start tracking a new habit.
+			        </button>
+		        </div>
 	        </div>
 	        {!!this.state.flashMessage &&
 						<p className="flashMessage">{this.state.flashMessage}</p>

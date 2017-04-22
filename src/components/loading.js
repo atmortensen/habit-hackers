@@ -5,19 +5,16 @@ export default class Loading extends Component {
 	constructor(props){
 		super(props)
 
-		let container
-		if(!this.props.noContainer) 
-			container = 'container'
-
 		this.state = {
 			loading: 'loading',
 			error: '',
-			container: container
+			container: ''
 		}
 	}
 
 	componentDidMount(){
-		// const _this = this
+		if(!this.props.noContainer) 
+			this.setState({container: 'container'})
 
 		this.addDot = setInterval(()=>{
 			if(this.state.loading.length>12)
@@ -39,7 +36,7 @@ export default class Loading extends Component {
 	
 	render(){
 		return (
-			<div className={"loading-wrapper " + this.state.container}>
+			<div className={'loading-wrapper ' + this.state.container}>
 				<h2>{this.state.loading}</h2>
 				<h3>{this.state.error}</h3>
 			</div>

@@ -35,8 +35,12 @@ a:hover {
 	color: #2580c1;
 }
 
-input:focus, textarea:focus, button:focus {
+input:focus, textarea:focus, button:focus, select:focus {
 	outline: none;
+}
+
+select {
+	padding: 5px;
 }
 
 button {

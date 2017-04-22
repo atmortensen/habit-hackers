@@ -8,6 +8,14 @@ export function createHabit(habit){
 	})
 }
 
+export function updateHabit(habit){
+	habit.teamEmails = habit.teamEmails.filter(email=>!!email)
+	return axios().put('api/habits/' + habit.id, {habit})
+	.then(function (response) {
+		return response.data
+	})
+}
+
 export function findHabits(){
 	return axios().get('api/habits/')
 	.then(function (response) {

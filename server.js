@@ -16,6 +16,8 @@ app.use(express.static(__dirname + '/build'))
 app.get('/api/habits', authenticate, databaseCtrl.findAll)
 app.get('/api/habits/:id', authenticate, databaseCtrl.findOne)
 app.post('/api/habits', authenticate, databaseCtrl.create)
+app.put('/api/habits/:id', authenticate, databaseCtrl.update)
+
 app.put('/api/habits/acceptInvite/:id', authenticate, databaseCtrl.acceptInvite)
 app.put('/api/habits/leaveHabit/:id', authenticate, databaseCtrl.leaveHabit)
 app.put('/api/habits/addSuccess/:id', authenticate, databaseCtrl.addSuccess)

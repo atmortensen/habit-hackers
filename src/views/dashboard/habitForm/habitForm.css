@@ -1,4 +1,4 @@
-.habitForm input, .habitForm textarea {
+.habitForm input, .habitForm textarea, .habitForm select {
 	width: 100%;	
 }
 

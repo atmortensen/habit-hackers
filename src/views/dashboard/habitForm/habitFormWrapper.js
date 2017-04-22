@@ -10,21 +10,23 @@ export default class NewHabitFormWrapper extends Component {
 	constructor(props){
 		super(props)
 
-		let originalState
 		if(this.props.habit){
-			originalState = {
+			this.originalState = {
 				head: 'Edit habit tracker...',
 				title: this.props.habit.title,
 				description: this.props.habit.description,
 				startDate: moment(this.props.habit.startDate),
 				endDate: this.props.habit.endDate ? moment(this.props.habit.endDate) : '',
-				teamEmails: ['', '', ''],
-				teamEmailsCount: 3,
+				teamEmails: ['', ''],
+				teamEmailsCount: 2,
 				reward: this.props.habit.reward,
-				noEnd: this.props.habit.endDate===''
+				noEnd: this.props.habit.endDate==='',
+				owner: this.props.habit.owner,
+				team: this.props.habit.team,
+				id: this.props.habit._id
 			}
 		} else {
-			originalState = {
+			this.originalState = {
 				head: 'Start tracking a new habit...',
 				title: '',
 				description: '',
@@ -37,32 +39,7 @@ export default class NewHabitFormWrapper extends Component {
 			}
 		}
 
-		this.state = originalState
-
-		this.reset = function(showConfirm){
-			const reset = (function(){
-		    this.setState(originalState)
-		    this.setState({teamEmails: ['', '', '']})
-				$('textarea').each(function () {
-				  	this.style.height = 'auto'
-				    this.style.height = (this.scrollHeight) + 'px'
-				})
-			}).bind(this)
-
-			if(showConfirm){
-				swal({
-					title: 'Are you sure?',
-				  text: 'You will lose all changes!',
-				  type: 'warning',
-				  showCancelButton: true,
-				  confirmButtonText: 'Yes'
-				}).then(function () {
-					reset()
-				}).catch(swal.noop)
-			} else {
-				reset()
-			}
-  	}
+		this.state = this.originalState
 	}
 
 	componentDidMount(){
@@ -73,6 +50,30 @@ export default class NewHabitFormWrapper extends Component {
 		  this.style.height = 'auto'
 		  this.style.height = (this.scrollHeight) + 'px'
 		})
+	}
+
+	reset(showConfirm){
+		const reset = (function(){
+	    this.setState(this.originalState)
+	    this.setState({teamEmails: ['', '', '']})
+			$('textarea').each(function () {
+			  	this.style.height = 'auto'
+			    this.style.height = (this.scrollHeight) + 'px'
+			})
+		}).bind(this)
+		if(showConfirm){
+			swal({
+				title: 'Are you sure?',
+			  text: 'You will lose all changes!',
+			  type: 'warning',
+			  showCancelButton: true,
+			  confirmButtonText: 'Yes'
+			}).then(function () {
+				reset()
+			}).catch(swal.noop)
+		} else {
+			reset()
+		}
 	}
 
 	titleHandler(e){
@@ -120,9 +121,15 @@ export default class NewHabitFormWrapper extends Component {
   		return
   	}
   	this.props.clearHabits()
-  	endpoints.createHabit(this.state).then(()=>{
-  		this.props.updateHabits('New habit tracker created successfully!')
-  	})
+  	if(this.state.owner){
+  		endpoints.updateHabit(this.state).then(()=>{
+  			this.props.updateHabits('Habit tracker updated successfully!')
+  		})
+  	} else {
+  		endpoints.createHabit(this.state).then(()=>{
+  			this.props.updateHabits('New habit tracker created successfully!')
+  		})
+  	}
   	this.reset()
   	this.props.hide()
   }
@@ -132,6 +139,11 @@ export default class NewHabitFormWrapper extends Component {
   		noEnd: e.target.checked,
   		endDate: ''
   		})
+  }
+
+  ownerChangeHandler(e){
+  	let newOwner = this.state.team.find(person=> person.id===e.target.value)
+  	this.setState({ owner: newOwner })
   }
 
 	render(){
@@ -155,7 +167,10 @@ export default class NewHabitFormWrapper extends Component {
 				endDateHandler={this.endDateHandler.bind(this)}
 				submit={this.submit.bind(this)}
 				noEndHandler={this.noEndHandler.bind(this)}
-				noEnd={this.state.noEnd} />
+				noEnd={this.state.noEnd}
+				team={this.state.team} 
+				owner={this.state.owner}
+				ownerChangeHandler={this.ownerChangeHandler.bind(this)} />
 		)
 	}
 }
