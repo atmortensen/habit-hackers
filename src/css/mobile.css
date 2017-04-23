@@ -1,0 +1,46 @@
+@media screen and (max-width: 1000px){
+	
+	.container {
+		width: 90%;
+	}
+
+	.modal-wrap .modal {
+		width: 90%;
+	}
+
+	.coverText {
+		padding: 10px;
+	}
+
+	.cover {
+		background-size: auto;
+	}
+
+	ul.menu {
+		height: 75px;
+		display: flex;
+		align-items: center;
+		margin: 0;
+		width: 100%;
+		padding: 10px;
+	}
+
+	.menu a {
+		font-size: 20px;
+	}
+
+	.menu a:not(.logo) {
+		position: absolute;
+		right: 10px;
+		float: right;
+	}
+
+	.menu li {
+		margin: 0;
+	}
+
+	.menu .login-logout {
+		display: none;
+	}
+
+}

@@ -46,8 +46,10 @@ export default class Dashboard extends Component {
 		$('.dropit').parent().on('click', function(){
 			let dropdown = $(this).parent().find('.dropdown')
 			if(dropdown.css('display')==='none'){
-				$('.dropdown').slideUp(400)
+				// $('.dropdown').slideUp(400)
 				dropdown.slideDown(400)
+			} else {
+				dropdown.slideUp(400)
 			}
 		})
 	}

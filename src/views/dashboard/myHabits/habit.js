@@ -31,12 +31,13 @@ export default class Habit extends Component {
   		this.props.habit.team.length>1){
   		swal({
 	  		title: 'Change team leader!',
-	  		text: 'Change the team lead before leaving, so everyone else won\'t loose their progress.',
+	  		text: 'Change the team lead before removing, so everyone else won\'t loose their progress.',
 	  	  type: 'warning'
 	  	})
   	} else {
   		swal({
-  			title: 'Are you sure you want to leave this team?',
+  			title: 'Are you sure?',
+  			text: 'This will permanently remove the habit from your dashboard.',
   		  type: 'error',
   		  showCancelButton: true,
   		  confirmButtonText: 'Yes'
@@ -91,7 +92,7 @@ export default class Habit extends Component {
 						<button
 							className="red"
 							onClick={this.leaveTeam.bind(this)}>
-							Leave Team
+							Remove
 						</button>
 					</div>
 				</div>

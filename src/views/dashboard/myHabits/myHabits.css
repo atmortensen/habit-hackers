@@ -50,8 +50,8 @@
 	display: none;
 }
 
-.habit:first-of-type .dropdown {
-	display: block;
+.habit:last-of-type {
+	margin-bottom: 60px;
 }
 
 .dashCal {
