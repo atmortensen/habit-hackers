@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import '../css/modal.css'
 
 export default class Modal extends Component {
-	constructor(){
-		super()
+	constructor(props){
+		super(props)
 
 		this.state = {
 			opacity: 0,
@@ -11,8 +11,6 @@ export default class Modal extends Component {
 			marginTop: '-50px'
 		}
 
-		this.closeModal = this.closeModal.bind(this)
-		this.openModal = this.openModal.bind(this)
 	}
 
 	closeModal(){
@@ -34,9 +32,9 @@ export default class Modal extends Component {
 	}
 
 	componentWillReceiveProps(newProps) {
-		if(newProps.display){
+		if(newProps.display===true){
 			this.openModal()
-		} else {
+		} else if(newProps.display===false) {
 			this.closeModal()
 		}
 	}

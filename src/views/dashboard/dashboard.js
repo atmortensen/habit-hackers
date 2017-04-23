@@ -7,6 +7,7 @@ import RandomQuote from '../../components/randomQuote'
 import HabitForm from './habitForm/habitFormWrapper'
 import MyHabits from './myHabits/myHabits'
 import Invite from './inviteAccept/invite'
+import Instructions from './instructions'
 import * as endpoints from '../../helpers/endpoints'
 import './dashboard.css'
 import $ from 'jquery'
@@ -22,7 +23,8 @@ export default class Dashboard extends Component {
 			habits: null,
 			flashMessage: null,
 			inviteId: this.props.match.params.id || localStorage.getItem('inviteId') || '',
-			showInviteModal: true
+			showInviteModal: true,
+			displayInstructions: false
 		}
 	}
 
@@ -50,13 +52,15 @@ export default class Dashboard extends Component {
 		})
 	}
 
-	showModal(){
-		this.setState({displayModal: true})
-	}
+	showModal(){ this.setState({displayModal: true}) }
+	hideModal(){ this.setState({displayModal: false}) }
 
-	hideModal(){
-		this.setState({displayModal: false})
+	showInstructions(){ 
+		this.setState({displayInstructions: true}, ()=>{
+			document.body.style.overflow = 'hidden'
+		})
 	}
+	hideInstructions(){ this.setState({displayInstructions: false}) }
 
 	closeInvite(){
 		this.setState({showInviteModal: false})
@@ -89,7 +93,7 @@ export default class Dashboard extends Component {
 		        <h3>Good {this.state.timeOfDay}, {jwt(localStorage.getItem('id_token')).name.split(' ')[0]}!</h3>
 		        <div className="topButtons">
 			        <button 
-			        	onClick={this.showModal.bind(this)}>
+			        	onClick={this.showInstructions.bind(this)}>
 			        	How to use.
 			        </button>
 			        <button 
@@ -103,6 +107,19 @@ export default class Dashboard extends Component {
 						<p className="flashMessage">{this.state.flashMessage}</p>
 	        }
 
+					<MyHabits 
+						habits={this.state.habits}
+						updateHabits={this.updateHabits.bind(this)}
+						clearHabits={this.clearHabits.bind(this)}  />
+
+					<div className="footer">
+	        	Created by <a 
+	        		target="_blank"
+	        		href="http://www.linkedin.com/in/alexander-mortensen">
+	        		Alexander Mortensen
+	        	</a>
+	        </div>
+
 	        {!!this.state.inviteId &&
 	        	<Modal
 		        	noClose="true"
@@ -114,6 +131,12 @@ export default class Dashboard extends Component {
 	        			closeFn={this.closeInvite.bind(this)} />  
 	        	</Modal>
 	        }
+
+	        <Modal 
+	        	hideFn={this.hideInstructions.bind(this)} 
+	        	display={this.state.displayInstructions}>
+	        	<Instructions />
+	        </Modal>
 	        
 	        <Modal 
 	        	hideFn={this.hideModal.bind(this)} 
@@ -123,10 +146,7 @@ export default class Dashboard extends Component {
 		        	updateHabits={this.updateHabits.bind(this)}
 		        	clearHabits={this.clearHabits.bind(this)} />
 	        </Modal>
-	        <MyHabits 
-	        	habits={this.state.habits}
-	        	updateHabits={this.updateHabits.bind(this)}
-	        	clearHabits={this.clearHabits.bind(this)}  />
+	       
 	      </div>
 	    )
     }

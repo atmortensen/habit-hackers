@@ -7,3 +7,12 @@
 .dashboard .topButtons button {
 	margin-left: 15px;
 }
+
+.instructions ul {
+	margin: 5px 0;
+	padding-left: 30px;
+}
+
+.instructions p {
+	margin: 5px 0;
+}
