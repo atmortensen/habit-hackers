@@ -27,6 +27,10 @@
 	color: #2580c1;
 }
 
+.cover button {
+	margin-top: 10px;
+}
+
 .coverText {
 	max-width: 500px;
 	color: #FFF;

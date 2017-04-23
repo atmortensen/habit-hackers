@@ -10,6 +10,7 @@
 
 	.coverText {
 		padding: 10px;
+		top: auto;
 	}
 
 	.cover {
@@ -41,6 +42,58 @@
 
 	.menu .login-logout {
 		display: none;
+	}
+
+	.quote {
+		padding: 10px;
+	}
+
+	.quote .quoteText {
+		font-size: 16px;
+	}
+
+	.quote .author {
+		font-size: 14px;
+		padding-top: 5px;
+	}
+
+	.dashboard .flex {
+		display: block;
+		text-align: center;
+	}
+
+	.dashboard .flex .topButtons button {
+		margin: 8px 0 0 0;
+		width: 100%;
+	}
+
+	.modal-wrap .modal {
+		padding: 15px;
+	}
+
+	.habit .dropit {
+		display: none;
+	}
+
+	.leaderBoard, .calendar {
+		width: 100%;
+	}
+
+	.leaderBoard {
+		margin: 0;
+	}
+
+	.leaderBoard ul {
+		width: 90%;
+	}
+
+	.dashCal {
+		flex-wrap: wrap;
+	}
+
+	.habitForm .react-datepicker__input-container {
+		width: 100%;
+		margin: 0;
 	}
 
 }
