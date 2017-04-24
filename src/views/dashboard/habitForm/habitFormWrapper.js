@@ -50,6 +50,8 @@ export default class NewHabitFormWrapper extends Component {
 		  this.style.height = 'auto'
 		  this.style.height = (this.scrollHeight) + 'px'
 		})
+
+		$('.react-datepicker__input-container input').attr('readonly', 'true')
 	}
 
 	reset(showConfirm){
