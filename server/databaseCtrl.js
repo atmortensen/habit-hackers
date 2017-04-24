@@ -1,5 +1,6 @@
 const Habit = require('./mongoConnect.js')
 const sendInvite = require('./nodeMailer.js')
+const moment = require('moment')
 exports = module.exports = {}
 
 exports.create = function(req, res){
@@ -76,7 +77,12 @@ exports.leaveHabit = function(req, res){
 exports.addSuccess = function(req,res){
 	Habit.findById(req.params.id, function(err, habit){
 		err ? console.log(err) : null
-		habit.team.find(person => person.id===req.user.sub).calendar.push(req.body.date)
+
+		let foundCalendar = habit.team.find(person => person.id===req.user.sub).calendar
+		if(foundCalendar.filter(date => moment(date).isSame(req.body.date, 'day')).length === 0 &&
+			moment(req.body.date).isBetween(habit.startDate, habit.endDate))
+			foundCalendar.push(req.body.date)
+
 		habit.save()
 		res.status(200).json({message: 'done'})	
 	})
@@ -85,8 +91,10 @@ exports.addSuccess = function(req,res){
 exports.removeSuccess = function(req,res){
 	Habit.findById(req.params.id, function(err, habit){
 		err ? console.log(err) : null
+
 		let foundCalendar = habit.team.find(person => person.id===req.user.sub).calendar
 		foundCalendar.splice(foundCalendar.indexOf(req.body.date), 1)
+
 		habit.save()
 		res.status(200).json({message: 'done'})	
 	})
@@ -101,9 +109,13 @@ exports.update = function(req, res){
 			habit.startDate = req.body.habit.startDate
 			habit.endDate = req.body.habit.endDate
 			habit.reward = req.body.habit.reward
-			habit.invited = req.body.habit.teamEmails
+			habit.invited = habit.invited.concat(req.body.habit.teamEmails)
 			habit.owner = req.body.habit.owner
-			habit.team = req.body.habit.team
+			habit.team.forEach(person => {
+				person.calendar = person.calendar.filter(date => {
+					return moment(date).isBetween(req.body.habit.startDate, req.body.habit.endDate)
+				})
+			})
 			habit.save()
 			sendInvite(req.user, req.body.habit.teamEmails, habit._id)
 		}

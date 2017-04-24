@@ -20,14 +20,15 @@ export default class Calendar extends Component {
 	}
 
 	calendarClick(day, { disabled }){
+		day = moment(day)
     if (!disabled) {
-    	if(moment(day).isBefore(moment())){
+    	if(day.isBefore(moment())){
     		this.setState({readyStyle: {
     			opacity: 1,
     			pointerEvents: 'all'
     		}})
-    		if(this.props.successDays.indexOf(day.toString())===-1){
-    			endpoints.addSuccess(this.props.id, day.toString()).then(()=>{
+    		if(this.props.successDays.indexOf(day.toISOString())===-1){
+    			endpoints.addSuccess(this.props.id, day).then(()=>{
     				this.props.updateHabits().then(()=>{
 	    				this.setState({readyStyle: {
 			    			opacity: 0,
@@ -36,7 +37,7 @@ export default class Calendar extends Component {
     				})
     			})
     		} else {
-    			endpoints.removeSuccess(this.props.id, day.toString()).then(()=>{
+    			endpoints.removeSuccess(this.props.id, day).then(()=>{
     				this.props.updateHabits().then(()=>{
 	    				this.setState({readyStyle: {
 			    			opacity: 0,
@@ -58,7 +59,7 @@ export default class Calendar extends Component {
 		const start = new Date(this.props.startDate)
 		const end = new Date(this.props.endDate)
 		const modifiers = {
-      success: day => this.props.successDays.indexOf(day.toString())!==-1
+      success: day => this.props.successDays.indexOf(moment(day).toISOString())!==-1
     }
 
 		return (
