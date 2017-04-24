@@ -96,4 +96,8 @@
 		margin: 0;
 	}
 
+	.inviteAccept .buttons button {
+		margin-bottom: 10px;
+	}
+
 }
