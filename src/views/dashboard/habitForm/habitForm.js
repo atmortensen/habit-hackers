@@ -70,6 +70,7 @@ function NewHabitForm(props){
 			<div className="section">
 				<DatePicker
 					placeholderText="Start Date"
+					readonly="true"
 					todayButton="Today"
 					selectsStart
 					startDate={props.startDate}
@@ -79,6 +80,7 @@ function NewHabitForm(props){
 				/>
 				<DatePicker
 					placeholderText="End Date"
+					readonly="true"
 					todayButton="Today"
 					selectsEnd
 					startDate={props.startDate}
