@@ -5,8 +5,12 @@ export default class LeaderBoard extends Component {
 	constructor(props){
 		super(props)
 
+		let endDate = moment().add(1, 'd')
+		if(endDate.isAfter(props.habit.endDate))
+			endDate = moment(props.habit.endDate)
+
 		this.state = {
-			totalDays: moment().diff(moment(props.habit.startDate), 'days')+1
+			totalDays: endDate.diff(moment(props.habit.startDate), 'days')
 		}
 	}
 

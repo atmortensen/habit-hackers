@@ -79,8 +79,11 @@ exports.addSuccess = function(req,res){
 		err ? console.log(err) : null
 
 		let foundCalendar = habit.team.find(person => person.id===req.user.sub).calendar
-		if(foundCalendar.filter(date => moment(date).isSame(req.body.date, 'day')).length === 0 &&
-			moment(req.body.date).isBetween(habit.startDate, habit.endDate))
+
+		let isBetween = moment(req.body.date).isAfter(habit.startDate)
+		if(habit.endDate)
+			isBetween = moment(req.body.date).isBetween(habit.startDate, habit.endDate)
+		if(foundCalendar.filter(date => moment(date).isSame(req.body.date, 'day')).length === 0 && isBetween)
 			foundCalendar.push(req.body.date)
 
 		habit.save()
@@ -113,7 +116,10 @@ exports.update = function(req, res){
 			habit.owner = req.body.habit.owner
 			habit.team.forEach(person => {
 				person.calendar = person.calendar.filter(date => {
-					return moment(date).isBetween(req.body.habit.startDate, req.body.habit.endDate)
+					let isBetween = moment(date).isAfter(req.body.habit.startDate)
+					if(req.body.habit.endDate)
+						isBetween = moment(date).isBetween(req.body.habit.startDate, req.body.habit.endDate)
+					return isBetween
 				})
 			})
 			habit.save()

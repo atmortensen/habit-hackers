@@ -22,7 +22,7 @@ export default class Calendar extends Component {
 	calendarClick(day, { disabled }){
 		day = moment(day)
     if (!disabled) {
-    	if(day.isBefore(moment())){
+    	if(day.isBefore(moment().add(1, 'd'))){
     		this.setState({readyStyle: {
     			opacity: 1,
     			pointerEvents: 'all'
