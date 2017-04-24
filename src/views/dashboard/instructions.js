@@ -12,7 +12,7 @@ function Instructions(){
 			</p>
 			<p>
 				<strong>Inviting team members:</strong><br />
-				Working as a team to create or break a habit can help you stay accountable to eachother. You can add team members' emails when you create the habit, and you can add more team member at any time after creating the habit by clicking the "Edit" button under each habit. 
+				Working as a team to create or break a habit can help you stay accountable to eachother. You can invite friends by email when you create the habit, and you can add more team members at any time after creating the habit by clicking the "Edit" button under each habit. 
 			</p>
 			<p>
 				<strong>Accepting an invitation:</strong><br />
