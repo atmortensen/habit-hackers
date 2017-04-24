@@ -102,7 +102,7 @@ function NewHabitForm(props){
 				<button 
 					type="button"
 					onClick={props.addEmailField}>
-					<i class="fa fa-plus"></i> Team Member
+					<i className="fa fa-plus"></i> Team Member
 				</button>
 			</div>
 
