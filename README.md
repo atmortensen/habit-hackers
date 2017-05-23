@@ -1,5 +1,5 @@
 # Habit Hackers
-Habit Hackers lets you keep track of your habits as a team.
+Habit Hackers lets you keep track of your habits as a team. Click [here](http://www.habithackers.net/) to visit the site.
 
 Some of the technologies used in development include:
 * React
