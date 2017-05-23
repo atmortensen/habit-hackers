@@ -1,11 +1,11 @@
 # Habit Hackers
 Habit Hackers lets you keep track of your habits as a team.
 
-Technologies utilized include:
+Some of the technologies used in development include:
 * React
 * NodeJS
 * MongoDB
-* and many other libraries
+* Auth0 JWTs
 
 [View a demo.](https://youtu.be/EkIPtIQdiGs)
 
