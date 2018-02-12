@@ -4,7 +4,7 @@
       rgba(0, 0, 0, .65), 
       rgba(0, 0, 0, .35)
     ),
-		url('https://s3-us-west-2.amazonaws.com/habit-hackers/cover.jpeg');
+		url('https://storage.googleapis.com/habit-hacker-assets/background.jpg');
 	background-size: cover;
 	background-position: 35% 20%;
 	height: calc(100vh - 75px);
