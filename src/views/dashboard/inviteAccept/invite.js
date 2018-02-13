@@ -55,7 +55,7 @@ export default class Invite extends Component {
 		return (
 			<div className="inviteAccept">
 				<div className="head">
-					<img alt="Logo" src="https://s3-us-west-2.amazonaws.com/habit-hackers/logoSmall.png" />
+					<img alt="Logo" src="https://storage.googleapis.com/habit-hacker-assets/Logo-Small.png" />
 					<h1>{this.state.habit.owner.name}</h1>
 					<h2>Invited you to join his/her team!</h2>
 				</div>
