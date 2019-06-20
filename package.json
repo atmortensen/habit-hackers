@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "auth0-react-scripts": "0.6.20",
-    "eslint": "^3.19.0",
+    "eslint": "^4.18.2",
     "eslint-plugin-react": "^6.10.3"
   },
   "scripts": {
