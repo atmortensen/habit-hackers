@@ -11,7 +11,7 @@
     "dotenv": "^4.0.0",
     "events": "^1.1.1",
     "express": "^4.15.2",
-    "express-jwt": "^5.1.0",
+    "express-jwt": "^6.0.0",
     "jquery": "^3.2.1",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
